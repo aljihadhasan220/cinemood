@@ -15,12 +15,10 @@ import {
 import { motion, AnimatePresence } from "motion/react";
 
 export const DownloadPage: React.FC = () => {
-  const { selectedMovieId, allMovies, setView } = useApp();
+  const { selectedMovieId, allMovies, setView, isLoading } = useApp();
   const [countdown, setCountdown] = useState(5);
   const [linksGenerated, setLinksGenerated] = useState(false);
   const [selectedMirror, setSelectedMirror] = useState<string | null>(null);
-
-  const movie = allMovies.find(m => m.id === selectedMovieId || m.slug === selectedMovieId);
 
   // 5-second countdown loader sequence
   useEffect(() => {
@@ -33,6 +31,17 @@ export const DownloadPage: React.FC = () => {
       setLinksGenerated(true);
     }
   }, [countdown]);
+
+  if (isLoading) {
+    return (
+      <div id="download-skeleton" className="mx-auto max-w-3xl px-4 py-12 sm:px-6 lg:px-8 space-y-8 animate-pulse text-center">
+        <div className="h-10 w-24 bg-white/5 rounded-xl animate-pulse" />
+        <div className="h-64 bg-white/5 rounded-3xl animate-pulse" />
+      </div>
+    );
+  }
+
+  const movie = allMovies.find(m => m.id === selectedMovieId || m.slug === selectedMovieId);
 
   if (!movie) {
     return (

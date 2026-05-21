@@ -107,17 +107,64 @@ interface AppContextProps {
 
 const AppContext = createContext<AppContextProps | undefined>(undefined);
 
-export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [view, setViewState] = useState<ViewType>("home");
-  const [selectedMovieId, setSelectedMovieId] = useState<string | null>(null);
-  const [searchQuery, setSearchQuery] = useState<string>("");
-  const [activeCategory, setActiveCategory] = useState<string | null>(null);
-  const [filters, setFilters] = useState<SearchFilters>({
-    genre: "All",
+const getInitialStateFromPath = () => {
+  if (typeof window === "undefined") {
+    return {
+      view: "home" as ViewType,
+      selectedMovieId: null as string | null,
+      searchQuery: "",
+      activeCategory: null as string | null,
+    };
+  }
+  const parts = window.location.pathname.split("/").filter(Boolean);
+  if (parts.length === 0) {
+    return { view: "home" as ViewType, selectedMovieId: null, searchQuery: "", activeCategory: null };
+  }
+  if (parts[0] === "bookmarks" || parts[0] === "my-list") {
+    return { view: "bookmarks" as ViewType, selectedMovieId: null, searchQuery: "", activeCategory: null };
+  }
+  if (parts[0] === "search" || parts[0] === "explore") {
+    const params = new URLSearchParams(window.location.search);
+    const q = params.get("q") || "";
+    return { view: "search" as ViewType, selectedMovieId: null, searchQuery: q, activeCategory: null };
+  }
+  if (parts[0] === "category" && parts[1]) {
+    return { view: "search" as ViewType, selectedMovieId: null, searchQuery: "", activeCategory: parts[1] };
+  }
+  if (parts[0] === "movie" && parts[1]) {
+    return { view: "detail" as ViewType, selectedMovieId: parts[1], searchQuery: "", activeCategory: null };
+  }
+  if (parts[0] === "download" && parts[1]) {
+    return { view: "download" as ViewType, selectedMovieId: parts[1], searchQuery: "", activeCategory: null };
+  }
+  return { view: "home" as ViewType, selectedMovieId: null, searchQuery: "", activeCategory: null };
+};
+
+const getInitialFilters = (categorySlug: string | null): SearchFilters => {
+  let genreVal = "All";
+  if (categorySlug) {
+    if (categorySlug === "anime") genreVal = "Anime";
+    else if (categorySlug === "scifi" || categorySlug === "sci-fi") genreVal = "Sci-Fi";
+    else if (categorySlug === "horror") genreVal = "Horror";
+    else if (categorySlug === "mystery") genreVal = "Mystery";
+    else if (categorySlug === "action") genreVal = "Action";
+    else if (categorySlug === "drama") genreVal = "Drama";
+  }
+  return {
+    genre: genreVal,
     year: "All",
     quality: "All",
     rating: 0
-  });
+  };
+};
+
+export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+  const initial = getInitialStateFromPath();
+  const [view, setViewState] = useState<ViewType>(initial.view);
+  const [selectedMovieId, setSelectedMovieId] = useState<string | null>(initial.selectedMovieId);
+  const [searchQuery, setSearchQuery] = useState<string>(initial.searchQuery);
+  const [activeCategory, setActiveCategory] = useState<string | null>(initial.activeCategory);
+  const [filters, setFilters] = useState<SearchFilters>(() => getInitialFilters(initial.activeCategory));
 
   // Load bookmarks & continueWatching from localStorage
   const [bookmarks, setBookmarks] = useState<string[]>(() => {
@@ -174,21 +221,6 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
   useEffect(() => {
     fetchMovies();
   }, []);
-
-  // Listen for initial pathname parse and popstate updates (browser back/forward button trigger)
-  useEffect(() => {
-    if (allMovies.length > 0) {
-      parsePathToState(
-        window.location.pathname,
-        allMovies,
-        setViewState,
-        setSelectedMovieId,
-        setSearchQuery,
-        setFilters,
-        setActiveCategory
-      );
-    }
-  }, [allMovies]);
 
   useEffect(() => {
     const handlePopState = () => {
