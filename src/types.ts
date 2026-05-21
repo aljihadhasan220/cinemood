@@ -1,5 +1,6 @@
 export interface Movie {
   id: string | number;
+  slug?: string;
   title: string;
   originalTitle?: string;
   tagline?: string;
@@ -20,6 +21,7 @@ export interface Movie {
   releasingDate?: string;
   size?: string;
   director?: string;
+  watchOnlineUrl?: string;
 }
 
 export interface CastMember {

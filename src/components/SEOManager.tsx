@@ -7,7 +7,7 @@ export const SEOManager: React.FC = () => {
   useEffect(() => {
     // 1. Identify active movie for metadata if detail/download view is open
     const activeMovie = (view === "detail" || view === "download") && selectedMovieId
-      ? allMovies.find(m => m.id === selectedMovieId)
+      ? allMovies.find(m => m.id === selectedMovieId || m.slug === selectedMovieId)
       : null;
 
     // 2. Determine SEO attributes based on page context

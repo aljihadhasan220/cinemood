@@ -20,7 +20,7 @@ export const DownloadPage: React.FC = () => {
   const [linksGenerated, setLinksGenerated] = useState(false);
   const [selectedMirror, setSelectedMirror] = useState<string | null>(null);
 
-  const movie = allMovies.find(m => m.id === selectedMovieId);
+  const movie = allMovies.find(m => m.id === selectedMovieId || m.slug === selectedMovieId);
 
   // 5-second countdown loader sequence
   useEffect(() => {
@@ -97,7 +97,12 @@ export const DownloadPage: React.FC = () => {
           
           {/* 1. 1080p Download button (FHD Ultra Premium Premium Direct) */}
           <div
-            onClick={() => handleExternalNavigate(`https://gofile.io/d/cinemood-${movie.id}-1080p`)}
+            onClick={() => {
+              const localUrl = movie.downloadLinks?.find(l => l.serverName.toLowerCase().includes("1080"))?.url 
+                || movie.downloadLinks?.[0]?.url 
+                || `https://gofile.io/d/cinemood-${movie.id}-1080p`;
+              handleExternalNavigate(localUrl);
+            }}
             className="group bg-gradient-to-r from-neutral-900/90 to-neutral-800/95 hover:from-[#111111] hover:to-[#171717] hover:border-brand-red/40 text-left p-5 rounded-2xl border border-white/5 shadow-lg hover:shadow-[0_0_20px_rgba(229,9,20,0.35)] transition-all duration-300 transform hover:-translate-y-0.5 active:translate-y-0 cursor-pointer flex items-center justify-between gap-4"
           >
             <div className="flex items-center gap-4">
@@ -118,7 +123,12 @@ export const DownloadPage: React.FC = () => {
 
           {/* 2. 720p Download button (HD Standalone Stream) */}
           <div
-            onClick={() => handleExternalNavigate(`https://gofile.io/d/cinemood-${movie.id}-720p`)}
+            onClick={() => {
+              const localUrl = movie.downloadLinks?.find(l => l.serverName.toLowerCase().includes("720"))?.url 
+                || movie.downloadLinks?.[1]?.url 
+                || `https://gofile.io/d/cinemood-${movie.id}-720p`;
+              handleExternalNavigate(localUrl);
+            }}
             className="group bg-gradient-to-r from-neutral-900/90 to-neutral-800/95 hover:from-[#111111] hover:to-[#171717] hover:border-brand-red/40 text-left p-5 rounded-2xl border border-white/5 shadow-lg hover:shadow-[0_0_20px_rgba(229,9,20,0.35)] transition-all duration-300 transform hover:-translate-y-0.5 active:translate-y-0 cursor-pointer flex items-center justify-between gap-4"
           >
             <div className="flex items-center gap-4">
@@ -139,7 +149,12 @@ export const DownloadPage: React.FC = () => {
 
           {/* 3. 480p Download button (SD Mobile Optimized Speed) */}
           <div
-            onClick={() => handleExternalNavigate(`https://gofile.io/d/cinemood-${movie.id}-480p`)}
+            onClick={() => {
+              const localUrl = movie.downloadLinks?.find(l => l.serverName.toLowerCase().includes("480"))?.url 
+                || movie.downloadLinks?.[2]?.url 
+                || `https://gofile.io/d/cinemood-${movie.id}-480p`;
+              handleExternalNavigate(localUrl);
+            }}
             className="group bg-gradient-to-r from-neutral-900/90 to-neutral-800/95 hover:from-[#111111] hover:to-[#171717] hover:border-brand-red/40 text-left p-5 rounded-2xl border border-white/5 shadow-lg hover:shadow-[0_0_20px_rgba(229,9,20,0.35)] transition-all duration-300 transform hover:-translate-y-0.5 active:translate-y-0 cursor-pointer flex items-center justify-between gap-4"
           >
             <div className="flex items-center gap-4">
@@ -161,12 +176,16 @@ export const DownloadPage: React.FC = () => {
           {/* 4. Watch Online (Direct streaming trigger button) */}
           <div
             onClick={() => {
-              setView("detail");
-              // Micro delay to wait for panel transition then scroll to video container
-              setTimeout(() => {
-                const node = document.getElementById("player-container-node");
-                if (node) node.scrollIntoView({ behavior: "smooth" });
-              }, 100);
+              if (movie.watchOnlineUrl) {
+                handleExternalNavigate(movie.watchOnlineUrl);
+              } else {
+                setView("detail");
+                // Micro delay to wait for panel transition then scroll to video container
+                setTimeout(() => {
+                  const node = document.getElementById("player-container-node");
+                  if (node) node.scrollIntoView({ behavior: "smooth" });
+                }, 100);
+              }
             }}
             className="group bg-gradient-to-r from-brand-red to-red-600 hover:brightness-110 text-left p-5 rounded-2xl border border-white/10 shadow-xl hover:shadow-[0_0_25px_rgba(229,9,20,0.6)] transition-all duration-300 transform hover:-translate-y-0.5 active:translate-y-0 cursor-pointer flex items-center justify-between gap-4"
           >

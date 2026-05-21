@@ -10,26 +10,67 @@ const MOVIES_DATABASE: Movie[] = (moviesData as any[]).map(item => {
   // Transform comma separated genre string to array
   const genresArray = item.genre ? item.genre.split(",").map((g: string) => g.trim()) : ["Drama"];
   
-  // Base category allocation based on properties
+  // Base category allocation automatically determined based on properties for dynamic scalability
   const categoriesArray = ["latest"];
-  if (item.id === "dhumketu-2025" || item.id === "neon-reckoning-2026") {
-    categoriesArray.push("trending");
-    categoriesArray.push("recommended");
+  if (item.categories && Array.isArray(item.categories)) {
+    categoriesArray.push(...item.categories);
   }
-  if (item.language.toLowerCase().includes("bangla") || item.language.toLowerCase().includes("bengali")) {
-    categoriesArray.push("bangla-dubbed");
+
+  // Dynamic trending mapping
+  if (parsedImdb >= 8.0 || item.id === "dhumketu-2025" || item.id === "neon-reckoning-2026") {
+    if (!categoriesArray.includes("trending")) categoriesArray.push("trending");
+    if (!categoriesArray.includes("recommended")) categoriesArray.push("recommended");
   }
-  if (item.language.toLowerCase().includes("dual")) {
-    categoriesArray.push("dual-audio");
+
+  const titleLower = item.title.toLowerCase();
+  const descLower = (item.description || "").toLowerCase();
+  const langLower = (item.language || "").toLowerCase();
+
+  // Bangla Dubbed cinema classification
+  if (
+    langLower.includes("bangla") || 
+    langLower.includes("bengali") || 
+    titleLower.includes("bangla") || 
+    descLower.includes("bangla dubbed") || 
+    descLower.includes("bengali dubbed")
+  ) {
+    if (!categoriesArray.includes("bangla-dubbed")) {
+      categoriesArray.push("bangla-dubbed");
+    }
   }
-  if (genresArray.map(g => g.toLowerCase()).includes("action")) {
-    categoriesArray.push("action");
+
+  // Dual audio tracks classification
+  if (
+    langLower.includes("dual") || 
+    titleLower.includes("dual") || 
+    descLower.includes("dual audio")
+  ) {
+    if (!categoriesArray.includes("dual-audio")) {
+      categoriesArray.push("dual-audio");
+    }
   }
-  if (genresArray.map(g => g.toLowerCase()).includes("anime")) {
-    categoriesArray.push("anime");
+
+  // Anime classification
+  if (
+    genresArray.map(g => g.toLowerCase()).includes("anime") || 
+    titleLower.includes("anime") || 
+    descLower.includes("anime")
+  ) {
+    if (!categoriesArray.includes("anime")) {
+      categoriesArray.push("anime");
+    }
   }
-  if (item.id === "stranger-currents-2025") {
-    categoriesArray.push("netflix-series");
+
+  // Web series check
+  const isSeries = 
+    (item.runtime && item.runtime.toLowerCase().includes("episode")) || 
+    (item.size && item.size.toLowerCase().includes("pack")) || 
+    descLower.includes("series") || 
+    descLower.includes("season") || 
+    item.id === "stranger-currents-2025";
+  if (isSeries) {
+    if (!categoriesArray.includes("web-series")) categoriesArray.push("web-series");
+    if (!categoriesArray.includes("netflix-series")) categoriesArray.push("netflix-series");
   }
 
   return {
@@ -61,6 +102,7 @@ const MOVIES_DATABASE: Movie[] = (moviesData as any[]).map(item => {
     releasingDate: `${item.year || 2025}`,
     size: item.size || "1.5 GB",
     director: "Zee5 Originals",
+    watchOnlineUrl: item.watchOnlineUrl,
     
     // Original JSON database fields preserved for advanced details
     slug: item.slug || item.id,
@@ -88,9 +130,9 @@ export const movieService = {
     return MOVIES_DATABASE;
   },
 
-  // Get movie by ID
+  // Get movie by ID or Slug interchangeably
   getMovieById: async (id: string | number): Promise<Movie | null> => {
-    const movie = MOVIES_DATABASE.find(m => m.id === id);
+    const movie = MOVIES_DATABASE.find(m => m.id === id || m.slug === id);
     return movie || null;
   },
 
