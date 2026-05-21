@@ -91,7 +91,7 @@ const MOVIES_DATABASE: Movie[] = [...(moviesData as any[])].reverse().map(item =
       { name: "Guest Cast", role: "Main Lead", image: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=100&h=100" }
     ],
     screenshots: item.screenshots || [],
-    trailerUrl: "ARL_JNv7xT0", // Static trailer placeholder
+    trailerUrl: item.trailerUrl || (item.trailer ? (item.trailer.includes("v=") ? item.trailer.split("v=")[1].split("&")[0] : item.trailer.split("/").pop()?.split("?")[0]) : "ARL_JNv7xT0"),
     downloadLinks: (item.downloads || []).map((dl: any) => ({
       serverName: dl.serverName || "Gofile Premium CDN",
       url: dl.url || "https://gofile.io",
