@@ -11,7 +11,7 @@ const parsePathToState = (
   setFilters: React.Dispatch<React.SetStateAction<SearchFilters>>,
   setActiveCategory: (cat: string | null) => void
 ) => {
-  const parts = pathname.split("/").filter(Boolean);
+  const parts = pathname.split("/").filter(Boolean).map(p => decodeURIComponent(p).trim());
   if (parts.length === 0) {
     setView("home");
     setSelectedMovieId(null);
@@ -19,13 +19,15 @@ const parsePathToState = (
     return;
   }
 
-  if (parts[0] === "bookmarks" || parts[0] === "my-list") {
+  const section = parts[0].toLowerCase();
+
+  if (section === "bookmarks" || section === "my-list") {
     setView("bookmarks");
     setActiveCategory(null);
     return;
   }
 
-  if (parts[0] === "search" || parts[0] === "explore") {
+  if (section === "search" || section === "explore") {
     const params = new URLSearchParams(window.location.search);
     const q = params.get("q") || "";
     setSearchQuery(q);
@@ -34,8 +36,8 @@ const parsePathToState = (
     return;
   }
 
-  if (parts[0] === "category" && parts[1]) {
-    const slug = parts[1];
+  if (section === "category" && parts[1]) {
+    const slug = parts[1].toLowerCase();
     setActiveCategory(slug);
     setView("search");
     
@@ -58,16 +60,16 @@ const parsePathToState = (
     return;
   }
 
-  if (parts[0] === "movie" && parts[1]) {
-    const slug = parts[1];
+  if (section === "movie" && parts[1]) {
+    const slug = parts[1].toLowerCase();
     setSelectedMovieId(slug);
     setView("detail");
     setActiveCategory(null);
     return;
   }
 
-  if (parts[0] === "download" && parts[1]) {
-    const slug = parts[1];
+  if (section === "download" && parts[1]) {
+    const slug = parts[1].toLowerCase();
     setSelectedMovieId(slug);
     setView("download");
     setActiveCategory(null);
@@ -116,26 +118,27 @@ const getInitialStateFromPath = () => {
       activeCategory: null as string | null,
     };
   }
-  const parts = window.location.pathname.split("/").filter(Boolean);
+  const parts = window.location.pathname.split("/").filter(Boolean).map(p => decodeURIComponent(p).trim());
   if (parts.length === 0) {
     return { view: "home" as ViewType, selectedMovieId: null, searchQuery: "", activeCategory: null };
   }
-  if (parts[0] === "bookmarks" || parts[0] === "my-list") {
+  const section = parts[0].toLowerCase();
+  if (section === "bookmarks" || section === "my-list") {
     return { view: "bookmarks" as ViewType, selectedMovieId: null, searchQuery: "", activeCategory: null };
   }
-  if (parts[0] === "search" || parts[0] === "explore") {
+  if (section === "search" || section === "explore") {
     const params = new URLSearchParams(window.location.search);
     const q = params.get("q") || "";
     return { view: "search" as ViewType, selectedMovieId: null, searchQuery: q, activeCategory: null };
   }
-  if (parts[0] === "category" && parts[1]) {
-    return { view: "search" as ViewType, selectedMovieId: null, searchQuery: "", activeCategory: parts[1] };
+  if (section === "category" && parts[1]) {
+    return { view: "search" as ViewType, selectedMovieId: null, searchQuery: "", activeCategory: parts[1].toLowerCase() };
   }
-  if (parts[0] === "movie" && parts[1]) {
-    return { view: "detail" as ViewType, selectedMovieId: parts[1], searchQuery: "", activeCategory: null };
+  if (section === "movie" && parts[1]) {
+    return { view: "detail" as ViewType, selectedMovieId: parts[1].toLowerCase(), searchQuery: "", activeCategory: null };
   }
-  if (parts[0] === "download" && parts[1]) {
-    return { view: "download" as ViewType, selectedMovieId: parts[1], searchQuery: "", activeCategory: null };
+  if (section === "download" && parts[1]) {
+    return { view: "download" as ViewType, selectedMovieId: parts[1].toLowerCase(), searchQuery: "", activeCategory: null };
   }
   return { view: "home" as ViewType, selectedMovieId: null, searchQuery: "", activeCategory: null };
 };

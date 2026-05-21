@@ -130,9 +130,15 @@ export const movieService = {
     return MOVIES_DATABASE;
   },
 
-  // Get movie by ID or Slug interchangeably
+  // Get movie by ID or Slug interchangeably (case-insensitive & URI decoded for crawler and direct url safety)
   getMovieById: async (id: string | number): Promise<Movie | null> => {
-    const movie = MOVIES_DATABASE.find(m => m.id === id || m.slug === id);
+    if (!id) return null;
+    const searchId = typeof id === "string" ? decodeURIComponent(id).toLowerCase().trim() : id.toString();
+    const movie = MOVIES_DATABASE.find(m => {
+      const matchId = m.id ? m.id.toString().toLowerCase().trim() : "";
+      const matchSlug = m.slug ? m.slug.toLowerCase().trim() : "";
+      return matchId === searchId || matchSlug === searchId;
+    });
     return movie || null;
   },
 
