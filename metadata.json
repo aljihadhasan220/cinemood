@@ -1,0 +1,6 @@
+{
+  "name": "Cinemood",
+  "description": "Premium dynamic movie streaming and download platform. Enjoy seamless streaming, high-speed downloads, and smart suggestions for latest movies, series, and anime with a dark cinematic visual experience.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
