@@ -11,7 +11,9 @@ export const SearchPage: React.FC = () => {
     setSearchQuery,
     filters,
     setFilters,
-    setView
+    setView,
+    activeCategory,
+    setActiveCategory
   } = useApp();
 
   const [moviesList, setMoviesList] = useState<Movie[]>([]);
@@ -36,7 +38,31 @@ export const SearchPage: React.FC = () => {
     const performLiveQuery = async () => {
       try {
         setLoading(true);
-        const results = await movieService.searchMovies(searchQuery, filters);
+        let results = await movieService.searchMovies(searchQuery, filters);
+        
+        if (activeCategory) {
+          const lCat = activeCategory.toLowerCase();
+          if (lCat === "bengali-movies") {
+            results = results.filter(m => m.language.toLowerCase().includes("bengali") || m.language.toLowerCase().includes("bangla"));
+          } else if (lCat === "web-series") {
+            results = results.filter(m => m.duration.toLowerCase().includes("episode") || m.storyline.toLowerCase().includes("series") || m.id.toString().includes("series"));
+          } else if (lCat === "anime") {
+            results = results.filter(m => m.genres.map(g => g.toLowerCase()).includes("anime") || m.title.toLowerCase().includes("anime"));
+          } else if (lCat === "bangla-dubbed") {
+            results = results.filter(m => m.language.toLowerCase().includes("bangla") || m.language.toLowerCase().includes("bengali") || m.categories.includes("bangla-dubbed"));
+          } else if (lCat === "dual-audio") {
+            results = results.filter(m => m.language.toLowerCase().includes("dual") || m.categories.includes("dual-audio"));
+          } else if (lCat === "trending-movies") {
+            results = results.filter(m => m.categories.includes("trending"));
+          } else if (lCat === "latest-uploads") {
+            results = results.filter(m => m.categories.includes("latest"));
+          } else if (lCat === "hollywood-movies") {
+            results = results.filter(m => (m.language.toLowerCase().includes("eng") || m.language.toLowerCase().includes("dual")) && !m.genres.map(g => g.toLowerCase()).includes("anime"));
+          } else if (lCat === "south-indian-movies") {
+            results = results.filter(m => m.language.toLowerCase().includes("hindi") || m.title.toLowerCase().includes("south") || m.id.toString().includes("mayabi"));
+          }
+        }
+        
         setMoviesList(results);
       } catch (e) {
         console.error("Live indexing query fail", e);
@@ -50,7 +76,7 @@ export const SearchPage: React.FC = () => {
     }, 150);
 
     return () => clearTimeout(delayQuery);
-  }, [searchQuery, filters]);
+  }, [searchQuery, filters, activeCategory]);
 
   const handleResetFilters = () => {
     setSearchQuery("");
@@ -60,7 +86,39 @@ export const SearchPage: React.FC = () => {
       quality: "All",
       rating: 0
     });
+    setActiveCategory(null);
   };
+
+  // Map slugs to clean display metadata
+  const getCategoryMeta = () => {
+    if (!activeCategory) return { title: "Explore Global Catalog", subtitle: "Refine and query high quality encodes from Cinemood reference pools" };
+    const lCat = activeCategory.toLowerCase();
+    switch (lCat) {
+      case "bengali-movies":
+        return { title: "Bengali Movies & Web Series Archive", subtitle: "Direct Gofile streams and fast direct pointers for Bengali films and serials." };
+      case "web-series":
+        return { title: "Premium Web Series & Seasons Archive", subtitle: "Complete direct download packs for Netflix, Amazon, and Bengali streaming shows." };
+      case "anime":
+        return { title: "Anime Sagas & Japanese Animated Prints", subtitle: "Japanese animation masterpieces with English and Bangla subtitles index references." };
+      case "bangla-dubbed":
+        return { title: "Bangla Dubbed Blockbusters Index", subtitle: "High quality Hindi, South Indian, and English movies dubbed in Bangla." };
+      case "dual-audio":
+        return { title: "Dual Audio Multi-Language Encodes", subtitle: "Dual-audio blockbusters [English & Bangla/Hindi] in 1080p and 4K UHD resolutions." };
+      case "trending-movies":
+        return { title: "Trending Cinema Hits & Downloads", subtitle: "The most popular, high stakes blockbusters of the week on Cinemood nodes." };
+      case "latest-uploads":
+        return { title: "Latest High Speed Direct Downloads", subtitle: "Newly cataloged digital releases, encodes, and direct storage mirrors." };
+      case "hollywood-movies":
+        return { title: "Hollywood English & Dubbed Index", subtitle: "Curated collection of international action blockbusters and Academy awards hits." };
+      case "south-indian-movies":
+        return { title: "South Indian Action Dubbed Movies", subtitle: "Curated South Indian releases dubbed professionally in Hindi and Bangla." };
+      default:
+        const nameClean = activeCategory.split("-").map(p => p.charAt(0).toUpperCase() + p.slice(1)).join(" ");
+        return { title: `${nameClean} Archive`, subtitle: `Superfast direct files and crawlable indices for ${nameClean} collections.` };
+    }
+  };
+
+  const catMeta = getCategoryMeta();
 
   return (
     <div id="search-catalogue-page" className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8 space-y-10">
@@ -69,9 +127,9 @@ export const SearchPage: React.FC = () => {
       <div className="flex flex-wrap items-baseline justify-between gap-4 border-l-3 border-red-600 pl-3">
         <div>
           <h1 className="text-xl font-extrabold uppercase tracking-tight text-white flex items-center gap-2">
-            <Search className="h-5 w-5 text-red-500" /> Explore Global Catalog
+            <Search className="h-5 w-5 text-red-500" /> {catMeta.title}
           </h1>
-          <p className="text-xs text-neutral-400 mt-1">Refine and query high quality encodes from Cinemood reference pools</p>
+          <p className="text-xs text-neutral-400 mt-1">{catMeta.subtitle}</p>
         </div>
         <button
           onClick={handleResetFilters}

@@ -1,0 +1,11 @@
+# Robots.txt for Cinemood Movie Download & Watch Online Platform
+User-agent: *
+Allow: /
+Allow: /category/
+Allow: /movie/
+Allow: /download/
+Allow: /search
+Allow: /bookmarks
+
+# Sitemaps Location
+Sitemap: https://cinemood.net/sitemap.xml

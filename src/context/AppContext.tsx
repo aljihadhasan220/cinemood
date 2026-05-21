@@ -2,6 +2,84 @@ import React, { createContext, useContext, useState, useEffect } from "react";
 import { ViewType, SearchFilters, Movie } from "../types";
 import { movieService } from "../services/movieService";
 
+const parsePathToState = (
+  pathname: string,
+  allMovies: Movie[],
+  setView: (v: ViewType) => void,
+  setSelectedMovieId: (id: string | null) => void,
+  setSearchQuery: (q: string) => void,
+  setFilters: React.Dispatch<React.SetStateAction<SearchFilters>>,
+  setActiveCategory: (cat: string | null) => void
+) => {
+  const parts = pathname.split("/").filter(Boolean);
+  if (parts.length === 0) {
+    setView("home");
+    setSelectedMovieId(null);
+    setActiveCategory(null);
+    return;
+  }
+
+  if (parts[0] === "bookmarks" || parts[0] === "my-list") {
+    setView("bookmarks");
+    setActiveCategory(null);
+    return;
+  }
+
+  if (parts[0] === "search" || parts[0] === "explore") {
+    const params = new URLSearchParams(window.location.search);
+    const q = params.get("q") || "";
+    setSearchQuery(q);
+    setView("search");
+    setActiveCategory(null);
+    return;
+  }
+
+  if (parts[0] === "category" && parts[1]) {
+    const slug = parts[1];
+    setActiveCategory(slug);
+    setView("search");
+    
+    let genreVal = "All";
+    // General direct category matching
+    if (slug === "anime") genreVal = "Anime";
+    else if (slug === "scifi" || slug === "sci-fi") genreVal = "Sci-Fi";
+    else if (slug === "horror") genreVal = "Horror";
+    else if (slug === "mystery") genreVal = "Mystery";
+    else if (slug === "action") genreVal = "Action";
+    else if (slug === "drama") genreVal = "Drama";
+
+    setFilters({
+      genre: genreVal,
+      year: "All",
+      quality: "All",
+      rating: 0
+    });
+    setSearchQuery("");
+    return;
+  }
+
+  if (parts[0] === "movie" && parts[1]) {
+    const slug = parts[1];
+    setSelectedMovieId(slug);
+    setView("detail");
+    setActiveCategory(null);
+    return;
+  }
+
+  if (parts[0] === "download" && parts[1]) {
+    const slug = parts[1];
+    setSelectedMovieId(slug);
+    setView("download");
+    setActiveCategory(null);
+    return;
+  }
+
+  // default fallback
+  setView("home");
+  setSelectedMovieId(null);
+  setActiveCategory(null);
+};
+
 interface AppContextProps {
   view: ViewType;
   setView: (view: ViewType) => void;
@@ -23,6 +101,8 @@ interface AppContextProps {
   isLoading: boolean;
   refreshMovies: () => Promise<void>;
   navigateToMovie: (movieId: string, targetView?: ViewType) => void;
+  activeCategory: string | null;
+  setActiveCategory: (category: string | null) => void;
 }
 
 const AppContext = createContext<AppContextProps | undefined>(undefined);
@@ -31,6 +111,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
   const [view, setViewState] = useState<ViewType>("home");
   const [selectedMovieId, setSelectedMovieId] = useState<string | null>(null);
   const [searchQuery, setSearchQuery] = useState<string>("");
+  const [activeCategory, setActiveCategory] = useState<string | null>(null);
   const [filters, setFilters] = useState<SearchFilters>({
     genre: "All",
     year: "All",
@@ -94,6 +175,67 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     fetchMovies();
   }, []);
 
+  // Listen for initial pathname parse and popstate updates (browser back/forward button trigger)
+  useEffect(() => {
+    if (allMovies.length > 0) {
+      parsePathToState(
+        window.location.pathname,
+        allMovies,
+        setViewState,
+        setSelectedMovieId,
+        setSearchQuery,
+        setFilters,
+        setActiveCategory
+      );
+    }
+  }, [allMovies]);
+
+  useEffect(() => {
+    const handlePopState = () => {
+      if (allMovies.length > 0) {
+        parsePathToState(
+          window.location.pathname,
+          allMovies,
+          setViewState,
+          setSelectedMovieId,
+          setSearchQuery,
+          setFilters,
+          setActiveCategory
+        );
+      }
+    };
+    window.addEventListener("popstate", handlePopState);
+    return () => window.removeEventListener("popstate", handlePopState);
+  }, [allMovies]);
+
+  // Sync state back to URL pathname dynamically for crawlability & indexability
+  useEffect(() => {
+    if (isLoading || allMovies.length === 0) return;
+
+    let targetPath = "/";
+    if (view === "bookmarks") {
+      targetPath = "/bookmarks";
+    } else if (view === "search") {
+      if (activeCategory) {
+        targetPath = `/category/${activeCategory}`;
+      } else if (filters.genre && filters.genre !== "All") {
+        const slug = filters.genre.toLowerCase().replace(/[^a-z0-9]+/g, "-");
+        targetPath = `/category/${slug}`;
+      } else {
+        const queryStr = searchQuery ? `?q=${encodeURIComponent(searchQuery)}` : "";
+        targetPath = queryStr ? `/search${queryStr}` : "/search";
+      }
+    } else if (view === "detail" && selectedMovieId) {
+      targetPath = `/movie/${selectedMovieId}`;
+    } else if (view === "download" && selectedMovieId) {
+      targetPath = `/download/${selectedMovieId}`;
+    }
+
+    if (window.location.pathname !== targetPath) {
+      window.history.pushState({ view, selectedMovieId, activeCategory }, "", targetPath);
+    }
+  }, [view, selectedMovieId, activeCategory, searchQuery, filters.genre, isLoading, allMovies]);
+
   const setView = (v: ViewType) => {
     // Reset page scroll position on view transitions
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -154,7 +296,9 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
         allMovies,
         isLoading,
         refreshMovies: fetchMovies,
-        navigateToMovie
+        navigateToMovie,
+        activeCategory,
+        setActiveCategory
       }}
     >
       {children}

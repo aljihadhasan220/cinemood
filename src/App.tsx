@@ -9,6 +9,7 @@ import { Navbar } from "./components/Navbar";
 import { Footer } from "./components/Footer";
 import { FloatingTelegram } from "./components/FloatingTelegram";
 import { TrailerPopup } from "./components/TrailerPopup";
+import { SEOManager } from "./components/SEOManager";
 
 // Pages
 import { Home } from "./pages/Home";
@@ -43,6 +44,9 @@ const AppContent: React.FC = () => {
   return (
     <div className="min-h-screen bg-brand-dark text-[#e5e5e5] flex flex-col font-sans selection:bg-brand-red selection:text-white pb-safe relative">
       
+      {/* Dynamic SEO Tag Controller Module */}
+      <SEOManager />
+
       {/* Dynamic Crimson Ambient Glow behind Layout Header */}
       <div className="pointer-events-none absolute top-0 left-0 w-full h-[500px] bg-gradient-to-b from-[#e5091422] to-transparent opacity-40 z-0" />
 

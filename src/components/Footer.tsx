@@ -3,15 +3,16 @@ import { Send, ShieldCheck, Mail, Heart, Film } from "lucide-react";
 import { useApp } from "../context/AppContext";
 
 export const Footer: React.FC = () => {
-  const { setView, setFilters } = useApp();
+  const { setView, setFilters, setActiveCategory } = useApp();
 
-  const handleCategoryClick = (category: string) => {
+  const handleCategoryClick = (category: string, slug: string) => {
     setFilters({
       genre: category,
       year: "All",
       quality: "All",
       rating: 0
     });
+    setActiveCategory(slug);
     setView("search");
   };
 
@@ -21,7 +22,7 @@ export const Footer: React.FC = () => {
       <div className="absolute inset-x-0 top-0 h-[1px] bg-gradient-to-r from-transparent via-brand-red/30 to-transparent" />
 
       <div className="mx-auto max-w-7xl px-6 py-12 sm:px-8 lg:px-12">
-        <div className="grid grid-cols-1 gap-10 md:grid-cols-3 items-start border-b border-white/5 pb-10">
+        <div className="grid grid-cols-1 gap-10 sm:grid-cols-2 md:grid-cols-4 items-start border-b border-white/5 pb-10">
           
           {/* 1. About Section */}
           <div className="space-y-4">
@@ -38,30 +39,74 @@ export const Footer: React.FC = () => {
             </p>
           </div>
 
-          {/* 2. Contact & DMCA Section */}
+          {/* 2. Categorical Fast Archives Link module (Crawlable SEO anchors) */}
+          <div className="space-y-4">
+            <h4 className="font-sans text-xs font-bold uppercase tracking-wider text-neutral-100">
+              Browse Movie Archives
+            </h4>
+            <div className="flex flex-col gap-2.5 text-xs">
+              <a
+                href="/category/bengali-movies"
+                onClick={(e) => { e.preventDefault(); handleCategoryClick("All", "bengali-movies"); }}
+                className="hover:text-brand-red transition-colors text-left"
+              >
+                Bengali Movies &amp; Serials
+              </a>
+              <a
+                href="/category/web-series"
+                onClick={(e) => { e.preventDefault(); handleCategoryClick("All", "web-series"); }}
+                className="hover:text-brand-red transition-colors text-left"
+              >
+                Web Series &amp; Shows
+              </a>
+              <a
+                href="/category/anime"
+                onClick={(e) => { e.preventDefault(); handleCategoryClick("Anime", "anime"); }}
+                className="hover:text-brand-red transition-colors text-left"
+              >
+                Anime Sagas &amp; Films
+              </a>
+              <a
+                href="/category/dual-audio"
+                onClick={(e) => { e.preventDefault(); handleCategoryClick("All", "dual-audio"); }}
+                className="hover:text-brand-red transition-colors text-left"
+              >
+                Dual Audio Multi-Tracks
+              </a>
+              <a
+                href="/category/bangla-dubbed"
+                onClick={(e) => { e.preventDefault(); handleCategoryClick("All", "bangla-dubbed"); }}
+                className="hover:text-brand-red transition-colors text-left"
+              >
+                Bangla Dubbed Cinema
+              </a>
+            </div>
+          </div>
+
+          {/* 3. Contact & DMCA Section */}
           <div className="space-y-4">
             <h4 className="font-sans text-xs font-bold uppercase tracking-wider text-neutral-100 flex items-center gap-1.5">
               <ShieldCheck className="h-4 w-4 text-brand-red" />
-              Transparency & Legal
+              Transparency &amp; Legal
             </h4>
-            <p className="text-xs text-neutral-400 leading-relaxed max-w-sm">
-              All indexed stream points are compiled from public file storage services. We respect intellectual claims and comply with DMCA fast takedown requests.
+            <p className="text-xs text-neutral-400 leading-relaxed">
+              All indexed stream points are compiled from public platforms. We comply with DMCA fast takedown requests.
             </p>
             <div className="flex flex-col gap-2 pt-1">
               <div className="flex items-center gap-2 text-xs font-semibold text-neutral-300">
                 <Mail className="h-4 w-4 text-neutral-500" />
-                <span>Contact Abuse: <span className="text-brand-red font-mono">abuse@cinemood.net</span></span>
+                <span>Abuse: <span className="text-brand-red font-mono">abuse@cinemood.net</span></span>
               </div>
             </div>
           </div>
 
-          {/* 3. Telegram Node Connection */}
+          {/* 4. Telegram Node Connection */}
           <div className="space-y-4 md:text-right md:flex md:flex-col md:items-end">
             <h4 className="font-sans text-xs font-bold uppercase tracking-wider text-neutral-100 md:text-right">
               Join Hub Network
             </h4>
             <p className="text-xs text-neutral-400 leading-relaxed max-w-xs md:text-right">
-              Request dubs, check Gofile speeds, report offline direct pointers and connect directly with the administrator.
+              Request dubs, check speeds, report offline pointers and connect directly with the administrator.
             </p>
             <div className="pt-2">
               <a

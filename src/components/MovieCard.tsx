@@ -26,9 +26,13 @@ export const MovieCard: React.FC<MovieCardProps> = ({ movie }) => {
       className="relative flex flex-col overflow-hidden rounded-2xl bg-white/5 border border-white/5 group cursor-pointer shadow-lg hover:border-brand-red/30 transition-all select-none"
     >
       {/* Aspect Ratio 2:3 Poster Frame */}
-      <div 
-        onClick={() => navigateToMovie(movie.id.toString())}
-        className="relative aspect-[2/3] w-full overflow-hidden bg-neutral-950"
+      <a 
+        href={`/movie/${movie.id}`}
+        onClick={(e) => {
+          e.preventDefault();
+          navigateToMovie(movie.id.toString());
+        }}
+        className="relative aspect-[2/3] w-full overflow-hidden bg-neutral-950 block"
       >
         <img
           src={movie.poster}
@@ -116,21 +120,27 @@ export const MovieCard: React.FC<MovieCardProps> = ({ movie }) => {
             </motion.div>
           )}
         </AnimatePresence>
-      </div>
+      </a>
 
       {/* Card Info Details */}
       <div 
-        onClick={() => navigateToMovie(movie.id.toString())}
-        className="p-3.5 flex flex-col justify-between flex-1 gap-1.5"
+        className="p-3.5 flex flex-col justify-between flex-1 gap-1.5 text-left block"
       >
-        <div className="space-y-1">
+        <a
+          href={`/movie/${movie.id}`}
+          onClick={(e) => {
+            e.preventDefault();
+            navigateToMovie(movie.id.toString());
+          }}
+          className="space-y-1 block hover:no-underline group/link"
+        >
           <p className="font-mono text-[9px] font-extrabold uppercase tracking-widest text-brand-red">
             {movie.genres.slice(0, 2).join(" / ")}
           </p>
-          <h3 className="text-xs sm:text-sm font-bold text-neutral-100 line-clamp-1 group-hover:text-brand-red transition-colors">
+          <h3 className="text-xs sm:text-sm font-bold text-neutral-100 line-clamp-1 group-hover/link:text-brand-red transition-colors">
             {movie.title}
           </h3>
-        </div>
+        </a>
 
         <div className="flex items-center justify-between text-[11px] font-mono text-neutral-400">
           <span>{movie.year}</span>
@@ -138,16 +148,18 @@ export const MovieCard: React.FC<MovieCardProps> = ({ movie }) => {
             <span className="text-[10px] px-1.5 py-0.5 rounded border border-white/5 bg-white/5 text-neutral-400">
               {movie.duration}
             </span>
-            <button
+            <a
+              href={`/download/${movie.id}`}
               onClick={(e) => {
+                e.preventDefault();
                 e.stopPropagation();
                 navigateToMovie(movie.id.toString(), "download");
               }}
-              className="text-neutral-400 hover:text-brand-red p-1 cursor-pointer"
+              className="text-neutral-400 hover:text-brand-red p-1 cursor-pointer block"
               title="Download Links Server"
             >
               <Download className="h-3.5 w-3.5" />
-            </button>
+            </a>
           </div>
         </div>
       </div>
