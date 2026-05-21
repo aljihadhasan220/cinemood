@@ -20,119 +20,69 @@ export const Footer: React.FC = () => {
       {/* Visual background details */}
       <div className="absolute inset-x-0 top-0 h-[1px] bg-gradient-to-r from-transparent via-brand-red/30 to-transparent" />
 
-      <div className="mx-auto max-w-7xl px-6 py-16 sm:px-8 lg:px-12">
-        <div className="grid grid-cols-1 gap-10 md:grid-cols-4 lg:gap-12">
-          {/* Brand Col */}
-          <div className="md:col-span-2">
+      <div className="mx-auto max-w-7xl px-6 py-12 sm:px-8 lg:px-12">
+        <div className="grid grid-cols-1 gap-10 md:grid-cols-3 items-start border-b border-white/5 pb-10">
+          
+          {/* 1. About Section */}
+          <div className="space-y-4">
             <div className="flex items-center gap-2">
-              <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-brand-red shadow-[0_0_15px_rgba(229,9,20,0.5)]">
-                <Film className="h-5 w-5 text-white" />
+              <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-brand-red shadow-[0_0_15px_rgba(229,9,20,0.5)]">
+                <Film className="h-4.5 w-4.5 text-white" />
               </div>
-              <span className="font-sans text-2xl font-black tracking-tighter text-white flex items-center">
-                CINEMOOD<span className="w-1.5 h-1.5 bg-white rounded-full ml-1"></span>
+              <span className="font-sans text-xl font-black tracking-tighter text-white flex items-center">
+                CINEMOOD<span className="w-1.5 h-1.5 bg-brand-red rounded-full ml-1"></span>
               </span>
             </div>
-            <p className="mt-4 text-sm text-neutral-400 leading-relaxed max-w-md">
-              Cinemood (&ldquo;Feel the Cinema&rdquo;) is a premium dark-themed movie search indexing and streaming reference platform. Get high-speed download mirrors, Bangla dubbed series, anime sagas, and dual-audio blockbusters instantly.
+            <p className="text-xs text-neutral-400 leading-relaxed max-w-sm">
+              Cinemood is a premium movie index referencing and metadata catalog. We manually index high quality mirror streams, direct downloads, and dual-audio files. Feel the cinema in style.
             </p>
-            <div className="mt-6 flex flex-wrap gap-4">
+          </div>
+
+          {/* 2. Contact & DMCA Section */}
+          <div className="space-y-4">
+            <h4 className="font-sans text-xs font-bold uppercase tracking-wider text-neutral-100 flex items-center gap-1.5">
+              <ShieldCheck className="h-4 w-4 text-brand-red" />
+              Transparency & Legal
+            </h4>
+            <p className="text-xs text-neutral-400 leading-relaxed max-w-sm">
+              All indexed stream points are compiled from public file storage services. We respect intellectual claims and comply with DMCA fast takedown requests.
+            </p>
+            <div className="flex flex-col gap-2 pt-1">
+              <div className="flex items-center gap-2 text-xs font-semibold text-neutral-300">
+                <Mail className="h-4 w-4 text-neutral-500" />
+                <span>Contact Abuse: <span className="text-brand-red font-mono">abuse@cinemood.net</span></span>
+              </div>
+            </div>
+          </div>
+
+          {/* 3. Telegram Node Connection */}
+          <div className="space-y-4 md:text-right md:flex md:flex-col md:items-end">
+            <h4 className="font-sans text-xs font-bold uppercase tracking-wider text-neutral-100 md:text-right">
+              Join Hub Network
+            </h4>
+            <p className="text-xs text-neutral-400 leading-relaxed max-w-xs md:text-right">
+              Request dubs, check Gofile speeds, report offline direct pointers and connect directly with the administrator.
+            </p>
+            <div className="pt-2">
               <a
                 href="https://t.me/cinemood_channel"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 rounded-xl bg-brand-red px-4 py-2 text-xs font-bold text-white shadow-[0_4px_12px_rgba(229,9,20,0.25)] hover:shadow-[0_4px_16px_rgba(229,9,20,0.4)] hover:brightness-110 hover:scale-105 active:scale-95 transition-all cursor-pointer"
+                className="inline-flex items-center gap-2 rounded-xl bg-brand-red px-5 py-2.5 text-xs font-bold text-white shadow-[0_4px_12px_rgba(229,9,20,0.25)] hover:shadow-[0_4px_16px_rgba(229,9,20,0.4)] hover:brightness-110 hover:scale-105 active:scale-95 transition-all cursor-pointer"
               >
                 <Send className="h-3.5 w-3.5 fill-white" />
-                Join our Telegram Node
+                Join Telegram Channel
               </a>
-              <div className="inline-flex items-center gap-1.5 rounded-xl border border-white/5 bg-white/5 p-2 text-xs text-neutral-300">
-                <ShieldCheck className="h-4 w-4 text-emerald-500" />
-                DMCA Compliant Indexer
-              </div>
             </div>
           </div>
 
-          {/* Quick Categories Col */}
-          <div>
-            <h4 className="font-sans text-sm font-bold uppercase tracking-wider text-neutral-100">Browse Catalog</h4>
-            <ul className="mt-4 space-y-2.5 text-sm">
-              <li>
-                <button
-                  onClick={() => handleCategoryClick("Sci-Fi")}
-                  className="hover:text-brand-red transition-colors cursor-pointer text-left"
-                >
-                  Sci-Fi & Cyberpunk
-                </button>
-              </li>
-              <li>
-                <button
-                  onClick={() => handleCategoryClick("Anime")}
-                  className="hover:text-brand-red transition-colors cursor-pointer text-left"
-                >
-                  Anime Sagas
-                </button>
-              </li>
-              <li>
-                <button
-                  onClick={() => handleCategoryClick("Action")}
-                  className="hover:text-brand-red transition-colors cursor-pointer text-left"
-                >
-                  Action Blockbusters
-                </button>
-              </li>
-              <li>
-                <button
-                  onClick={() => handleCategoryClick("Mystery")}
-                  className="hover:text-brand-red transition-colors cursor-pointer text-left"
-                >
-                  Mystery & Suspense
-                </button>
-              </li>
-              <li>
-                <button
-                  onClick={() => handleCategoryClick("Horror")}
-                  className="hover:text-brand-red transition-colors cursor-pointer text-left"
-                >
-                  Bangla & Folklore
-                </button>
-              </li>
-            </ul>
-          </div>
-
-          {/* Legal / Policy links */}
-          <div>
-            <h4 className="font-sans text-sm font-bold uppercase tracking-wider text-neutral-100">Transparency</h4>
-            <ul className="mt-4 space-y-2.5 text-sm">
-              <li>
-                <a href="#dmca-notice" className="hover:text-brand-red transition-colors">
-                  DMCA Take Down
-                </a>
-              </li>
-              <li>
-                <a href="#privacy-terms" className="hover:text-brand-red transition-colors">
-                  Privacy Policy
-                </a>
-              </li>
-              <li>
-                <a href="#rules-terms" className="hover:text-brand-red transition-colors">
-                  Terms of Service
-                </a>
-              </li>
-              <li>
-                <div className="flex items-center gap-1.5 mt-4 text-xs font-semibold text-neutral-300">
-                  <Mail className="h-3.5 w-3.5 text-brand-red" />
-                  <span>abuse@cinemood.net</span>
-                </div>
-              </li>
-            </ul>
-          </div>
         </div>
 
-        {/* Bottom Bar copyright & tech details */}
-        <div className="mt-16 border-t border-white/5 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-neutral-500 font-mono">
-          <p>&copy; {new Date().getFullYear()} Cinemood Cloud. All rights index-referenced. Built with React VPS Node.</p>
+        {/* Bottom Bar copyright */}
+        <div className="mt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-[10px] text-neutral-500 font-mono">
+          <p>&copy; {new Date().getFullYear()} Cinemood Media. All rights index-referenced. DMCA Protected.</p>
           <p className="flex items-center gap-1.5">
-            Designed with <Heart className="h-3 w-3 fill-brand-red text-brand-red animate-pulse" /> for movie buffs worldwide.
+            Designed with <Heart className="h-3 w-3 fill-brand-red text-brand-red" /> for premium cinephiles.
           </p>
         </div>
       </div>
