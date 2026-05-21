@@ -2,8 +2,8 @@ import { Movie, Review } from "../types";
 
 import moviesData from "../data/movies.json";
 
-// Dynamic movie dataset loaded manually from movies.json and mapped to full client properties
-const MOVIES_DATABASE: Movie[] = (moviesData as any[]).map(item => {
+// Base movie dataset loaded and reversed so that the newest additions appear first
+const MOVIES_DATABASE: Movie[] = [...(moviesData as any[])].reverse().map(item => {
   // Extract number IMDb rating from string like "7.5/10"
   const parsedImdb = item.imdb ? parseFloat(item.imdb.split("/")[0]) : 7.0;
   
