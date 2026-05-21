@@ -8,4 +8,4 @@ Allow: /search
 Allow: /bookmarks
 
 # Sitemaps Location
-Sitemap: https://cinemood.net/sitemap.xml
+Sitemap: https://cinemood.site/sitemap.xml

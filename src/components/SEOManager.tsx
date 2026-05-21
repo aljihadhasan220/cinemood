@@ -19,7 +19,7 @@ export const SEOManager: React.FC = () => {
     let ogImage = "https://images.unsplash.com/photo-1536440136628-849c177e76a1?auto=format&fit=crop&q=80&w=1200&h=630"; // Cinematic fall-back
     let schemaMarkup: any = null;
 
-    const siteBase = "https://cinemood.net";
+    const siteBase = "https://cinemood.site";
 
     if (view === "home") {
       title = "Cinemood - HD Movie Downloads | Bengali Movies, Dual Audio & Web Series";
@@ -52,7 +52,7 @@ export const SEOManager: React.FC = () => {
           "contactPoint": {
             "@type": "ContactPoint",
             "contactType": "abuse reporting",
-            "email": "abuse@cinemood.net"
+            "email": "abuse@cinemood.site"
           }
         }
       ];

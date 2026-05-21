@@ -6,7 +6,7 @@ import { fileURLToPath } from "url";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const siteBase = "https://cinemood.net";
+const siteBase = "https://cinemood.site";
 const currentDate = new Date().toISOString().split("T")[0];
 
 // Paths
