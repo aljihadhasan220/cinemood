@@ -253,6 +253,12 @@ export const DetailPage: React.FC = () => {
               {movie.originalTitle && movie.originalTitle !== movie.title && (
                 <p className="text-sm text-neutral-400 font-mono">Original: {movie.originalTitle}</p>
               )}
+              {(movie as any).fullTitle && (
+                <div className="text-xs text-brand-red/90 bg-brand-red/5 border border-brand-red/15 rounded-xl p-3 font-mono leading-relaxed select-all">
+                  <span className="block text-[9px] uppercase tracking-widest text-brand-red/80 font-bold mb-1 font-sans">Index Print String</span>
+                  {(movie as any).fullTitle}
+                </div>
+              )}
             </div>
 
             <p className="text-sm md:text-base text-neutral-300 leading-relaxed max-w-3xl font-sans text-justify">
