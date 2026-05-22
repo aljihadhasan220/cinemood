@@ -17,7 +17,7 @@ const MOVIES_DATABASE: Movie[] = [...(moviesData as any[])].reverse().map(item =
   }
 
   // Dynamic trending mapping
-  if (parsedImdb >= 8.0 || item.id === "dhumketu-2025" || item.id === "neon-reckoning-2026") {
+  if (parsedImdb >= 8.0 || item.id === "dhumketu-2025" || item.id === "neon-reckoning-2026" || item.id === "rakkhosh-2026") {
     if (!categoriesArray.includes("trending")) categoriesArray.push("trending");
     if (!categoriesArray.includes("recommended")) categoriesArray.push("recommended");
   }
