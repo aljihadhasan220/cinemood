@@ -110,7 +110,13 @@ export const DownloadPage: React.FC = () => {
               const localUrl = movie.downloadLinks?.find(l => l.serverName.toLowerCase().includes("1080"))?.url 
                 || movie.downloadLinks?.[0]?.url 
                 || `https://gofile.io/d/cinemood-${movie.id}-1080p`;
-              handleExternalNavigate(localUrl);
+              if (movie.id === "new-gods-yang-jian-2022") {
+                setSelectedMirror(localUrl);
+                window.open("https://eternalwheeled.com/nb8tim21p?key=14ec617a43996791d6944be87909a459", "_blank", "noopener,noreferrer");
+                window.location.href = localUrl;
+              } else {
+                handleExternalNavigate(localUrl);
+              }
             }}
             className="group bg-gradient-to-r from-neutral-900/90 to-neutral-800/95 hover:from-[#111111] hover:to-[#171717] hover:border-brand-red/40 text-left p-5 rounded-2xl border border-white/5 shadow-lg hover:shadow-[0_0_20px_rgba(229,9,20,0.35)] transition-all duration-300 transform hover:-translate-y-0.5 active:translate-y-0 cursor-pointer flex items-center justify-between gap-4"
           >
@@ -136,7 +142,13 @@ export const DownloadPage: React.FC = () => {
               const localUrl = movie.downloadLinks?.find(l => l.serverName.toLowerCase().includes("720"))?.url 
                 || movie.downloadLinks?.[1]?.url 
                 || `https://gofile.io/d/cinemood-${movie.id}-720p`;
-              handleExternalNavigate(localUrl);
+              if (movie.id === "new-gods-yang-jian-2022") {
+                setSelectedMirror(localUrl);
+                window.open("https://eternalwheeled.com/nb8tim21p?key=14ec617a43996791d6944be87909a459", "_blank", "noopener,noreferrer");
+                window.location.href = localUrl;
+              } else {
+                handleExternalNavigate(localUrl);
+              }
             }}
             className="group bg-gradient-to-r from-neutral-900/90 to-neutral-800/95 hover:from-[#111111] hover:to-[#171717] hover:border-brand-red/40 text-left p-5 rounded-2xl border border-white/5 shadow-lg hover:shadow-[0_0_20px_rgba(229,9,20,0.35)] transition-all duration-300 transform hover:-translate-y-0.5 active:translate-y-0 cursor-pointer flex items-center justify-between gap-4"
           >
@@ -162,7 +174,13 @@ export const DownloadPage: React.FC = () => {
               const localUrl = movie.downloadLinks?.find(l => l.serverName.toLowerCase().includes("480"))?.url 
                 || movie.downloadLinks?.[2]?.url 
                 || `https://gofile.io/d/cinemood-${movie.id}-480p`;
-              handleExternalNavigate(localUrl);
+              if (movie.id === "new-gods-yang-jian-2022") {
+                setSelectedMirror(localUrl);
+                window.open("https://eternalwheeled.com/nb8tim21p?key=14ec617a43996791d6944be87909a459", "_blank", "noopener,noreferrer");
+                window.location.href = localUrl;
+              } else {
+                handleExternalNavigate(localUrl);
+              }
             }}
             className="group bg-gradient-to-r from-neutral-900/90 to-neutral-800/95 hover:from-[#111111] hover:to-[#171717] hover:border-brand-red/40 text-left p-5 rounded-2xl border border-white/5 shadow-lg hover:shadow-[0_0_20px_rgba(229,9,20,0.35)] transition-all duration-300 transform hover:-translate-y-0.5 active:translate-y-0 cursor-pointer flex items-center justify-between gap-4"
           >

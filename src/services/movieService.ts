@@ -13,11 +13,11 @@ const MOVIES_DATABASE: Movie[] = [...(moviesData as any[])].reverse().map(item =
   // Base category allocation automatically determined based on properties for dynamic scalability
   const categoriesArray = ["latest"];
   if (item.categories && Array.isArray(item.categories)) {
-    categoriesArray.push(...item.categories);
+    categoriesArray.push(...item.categories.filter((cat: string) => cat !== "trending"));
   }
 
   // Dynamic trending mapping
-  if (parsedImdb >= 8.0 || item.id === "dhumketu-2025" || item.id === "neon-reckoning-2026" || item.id === "rakkhosh-2026" || item.id === "prince-once-upon-a-time-in-dhaka-2026") {
+  if (parsedImdb >= 7.5 && parsedImdb <= 10.0) {
     if (!categoriesArray.includes("trending")) categoriesArray.push("trending");
     if (!categoriesArray.includes("recommended")) categoriesArray.push("recommended");
   }
