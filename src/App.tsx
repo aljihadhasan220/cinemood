@@ -10,6 +10,7 @@ import { Footer } from "./components/Footer";
 import { FloatingTelegram } from "./components/FloatingTelegram";
 import { TrailerPopup } from "./components/TrailerPopup";
 import { SEOManager } from "./components/SEOManager";
+import { PopunderManager } from "./components/PopunderManager";
 
 // Pages
 import { Home } from "./pages/Home";
@@ -46,6 +47,9 @@ const AppContent: React.FC = () => {
       
       {/* Dynamic SEO Tag Controller Module */}
       <SEOManager />
+
+      {/* Adsterra Non-Intrusive Popunder Manager */}
+      <PopunderManager />
 
       {/* Dynamic Crimson Ambient Glow behind Layout Header */}
       <div className="pointer-events-none absolute top-0 left-0 w-full h-[500px] bg-gradient-to-b from-[#e5091422] to-transparent opacity-40 z-0" />
