@@ -80,6 +80,13 @@ export const Footer: React.FC = () => {
               >
                 Bangla Dubbed Cinema
               </a>
+              <a
+                href="/category/malayalam-movies"
+                onClick={(e) => { e.preventDefault(); handleCategoryClick("All", "malayalam-movies"); }}
+                className="hover:text-brand-red transition-colors text-left"
+              >
+                Malayalam Movies &amp; Thrillers
+              </a>
             </div>
           </div>
 

@@ -60,6 +60,8 @@ export const SearchPage: React.FC = () => {
             results = results.filter(m => (m.language.toLowerCase().includes("eng") || m.language.toLowerCase().includes("dual")) && !m.genres.map(g => g.toLowerCase()).includes("anime"));
           } else if (lCat === "south-indian-movies") {
             results = results.filter(m => m.language.toLowerCase().includes("hindi") || m.title.toLowerCase().includes("south") || m.id.toString().includes("mayabi"));
+          } else if (lCat === "malayalam-movies" || lCat === "malayalam") {
+            results = results.filter(m => m.language.toLowerCase().includes("malayalam") || m.categories.includes("malayalam-movies") || m.categories.includes("malayalam"));
           }
         }
         
@@ -112,6 +114,9 @@ export const SearchPage: React.FC = () => {
         return { title: "Hollywood English & Dubbed Index", subtitle: "Curated collection of international action blockbusters and Academy awards hits." };
       case "south-indian-movies":
         return { title: "South Indian Action Dubbed Movies", subtitle: "Curated South Indian releases dubbed professionally in Hindi and Bangla." };
+      case "malayalam-movies":
+      case "malayalam":
+        return { title: "Malayalam Movies HD Free Downloads", subtitle: "Download thrilling Malayalam movie encodes with fast speed Gofile links." };
       default:
         const nameClean = activeCategory.split("-").map(p => p.charAt(0).toUpperCase() + p.slice(1)).join(" ");
         return { title: `${nameClean} Archive`, subtitle: `Superfast direct files and crawlable indices for ${nameClean} collections.` };

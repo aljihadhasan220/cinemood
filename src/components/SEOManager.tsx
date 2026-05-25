@@ -83,6 +83,10 @@ export const SEOManager: React.FC = () => {
         } else if (activeCategory === "bangla-dubbed") {
           title = "Bangla Dubbed Blockbusters & South Series Index – Cinemood";
           description = "Fast direct storage mirrors for international action movies, South Indian blockbusters, and series dubbed natively in Bangla.";
+        } else if (activeCategory === "malayalam-movies" || activeCategory === "malayalam") {
+          title = "Malayalam Movies HD Free Direct Download – Cinemood";
+          description = "Download Malayalam thrillers and dramatic blockbusters with superfast direct links in 480p, 720p, and 1080p high quality encodes.";
+          keywords = "Malayalam movies download, Malayalam cinema Gofile, Drishyam download, Malayalam thrillers Free download";
         } else {
           title = `${cleanCat} Movie Archives & Direct Downloads – Cinemood`;
           description = `Free high speed downloads and stream references for ${cleanCat} files. Complete catalog of high quality 4K and 1080p prints.`;
