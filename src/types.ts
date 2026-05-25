@@ -45,7 +45,7 @@ export interface Review {
   date: string;
 }
 
-export type ViewType = "home" | "detail" | "download" | "search" | "bookmarks";
+export type ViewType = "home" | "detail" | "download" | "search" | "bookmarks" | "about" | "privacy" | "contact" | "disclaimer";
 
 export interface SearchFilters {
   genre: string;

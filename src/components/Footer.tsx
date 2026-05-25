@@ -95,7 +95,7 @@ export const Footer: React.FC = () => {
             <div className="flex flex-col gap-2 pt-1">
               <div className="flex items-center gap-2 text-xs font-semibold text-neutral-300">
                 <Mail className="h-4 w-4 text-neutral-500" />
-                <span>Abuse: <span className="text-brand-red font-mono">abuse@cinemood.site</span></span>
+                <span>Abuse: <span className="text-brand-red font-mono">cinemood.site@gmail.com</span></span>
               </div>
             </div>
           </div>
@@ -125,7 +125,42 @@ export const Footer: React.FC = () => {
 
         {/* Bottom Bar copyright */}
         <div className="mt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-[10px] text-neutral-500 font-mono">
-          <p>&copy; {new Date().getFullYear()} Cinemood Media. All rights index-referenced. DMCA Protected.</p>
+          <div className="space-y-1.5 text-center sm:text-left">
+            <p>&copy; {new Date().getFullYear()} Cinemood Media. All rights index-referenced. DMCA Protected.</p>
+            <div className="flex flex-wrap gap-x-3 gap-y-1 text-neutral-400 justify-center sm:justify-start">
+              <a
+                href="/about"
+                onClick={(e) => { e.preventDefault(); setView("about"); }}
+                className="hover:text-brand-red transition-colors cursor-pointer"
+              >
+                About Us
+              </a>
+              <span>•</span>
+              <a
+                href="/privacy"
+                onClick={(e) => { e.preventDefault(); setView("privacy"); }}
+                className="hover:text-brand-red transition-colors cursor-pointer"
+              >
+                Privacy Policy
+              </a>
+              <span>•</span>
+              <a
+                href="/contact"
+                onClick={(e) => { e.preventDefault(); setView("contact"); }}
+                className="hover:text-brand-red transition-colors cursor-pointer"
+              >
+                Contact
+              </a>
+              <span>•</span>
+              <a
+                href="/disclaimer"
+                onClick={(e) => { e.preventDefault(); setView("disclaimer"); }}
+                className="hover:text-brand-red transition-colors cursor-pointer"
+              >
+                Disclaimer &amp; DMCA
+              </a>
+            </div>
+          </div>
           <p className="flex items-center gap-1.5">
             Designed with <Heart className="h-3 w-3 fill-brand-red text-brand-red" /> for premium cinephiles.
           </p>

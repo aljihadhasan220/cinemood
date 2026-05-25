@@ -21,6 +21,31 @@ const parsePathToState = (
 
   const section = parts[0].toLowerCase();
 
+  if (section === "about") {
+    setView("about");
+    setSelectedMovieId(null);
+    setActiveCategory(null);
+    return;
+  }
+  if (section === "privacy") {
+    setView("privacy");
+    setSelectedMovieId(null);
+    setActiveCategory(null);
+    return;
+  }
+  if (section === "contact") {
+    setView("contact");
+    setSelectedMovieId(null);
+    setActiveCategory(null);
+    return;
+  }
+  if (section === "disclaimer") {
+    setView("disclaimer");
+    setSelectedMovieId(null);
+    setActiveCategory(null);
+    return;
+  }
+
   if (section === "bookmarks" || section === "my-list") {
     setView("bookmarks");
     setActiveCategory(null);
@@ -123,6 +148,18 @@ const getInitialStateFromPath = () => {
     return { view: "home" as ViewType, selectedMovieId: null, searchQuery: "", activeCategory: null };
   }
   const section = parts[0].toLowerCase();
+  if (section === "about") {
+    return { view: "about" as ViewType, selectedMovieId: null, searchQuery: "", activeCategory: null };
+  }
+  if (section === "privacy") {
+    return { view: "privacy" as ViewType, selectedMovieId: null, searchQuery: "", activeCategory: null };
+  }
+  if (section === "contact") {
+    return { view: "contact" as ViewType, selectedMovieId: null, searchQuery: "", activeCategory: null };
+  }
+  if (section === "disclaimer") {
+    return { view: "disclaimer" as ViewType, selectedMovieId: null, searchQuery: "", activeCategory: null };
+  }
   if (section === "bookmarks" || section === "my-list") {
     return { view: "bookmarks" as ViewType, selectedMovieId: null, searchQuery: "", activeCategory: null };
   }
@@ -250,6 +287,14 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     let targetPath = "/";
     if (view === "bookmarks") {
       targetPath = "/bookmarks";
+    } else if (view === "about") {
+      targetPath = "/about";
+    } else if (view === "privacy") {
+      targetPath = "/privacy";
+    } else if (view === "contact") {
+      targetPath = "/contact";
+    } else if (view === "disclaimer") {
+      targetPath = "/disclaimer";
     } else if (view === "search") {
       if (activeCategory) {
         targetPath = `/category/${activeCategory}`;

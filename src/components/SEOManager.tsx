@@ -52,7 +52,7 @@ export const SEOManager: React.FC = () => {
           "contactPoint": {
             "@type": "ContactPoint",
             "contactType": "abuse reporting",
-            "email": "abuse@cinemood.site"
+            "email": "cinemood.site@gmail.com"
           }
         }
       ];
@@ -253,6 +253,26 @@ export const SEOManager: React.FC = () => {
           }
         }
       ];
+    } else if (view === "about") {
+      title = "About Cinemood - Premium Movie Indexing System";
+      description = "Learn more about Cinemood, our core index curation philosophy, safe Gofile link standards, and dual-audio streaming referencing catalogs.";
+      keywords = "about cinemood, curated movie downloads, premium stream index, platform goals";
+      canonicalPath = "/about";
+    } else if (view === "privacy") {
+      title = "Privacy Policy & Cookie Consent - Cinemood";
+      description = "View our comprehensive privacy policy regarding cookie usage, local client caching, Popunder ad frequencies, and Google Analytics 4 tracking protocols.";
+      keywords = "privacy policy cinemood, cookie consent, adsterra popunder tracking, user privacy guidelines";
+      canonicalPath = "/privacy";
+    } else if (view === "contact") {
+      title = "Contact Support & Community - Cinemood";
+      description = "Connect with the Cinemood Central team instantly. Join our verified Telegram Channel, contact our support admin, or submit link abuse notifications.";
+      keywords = "contact cinemood support, telegram community, submit review request, report offline links";
+      canonicalPath = "/contact";
+    } else if (view === "disclaimer") {
+      title = "Disclaimer & DMCA Copyright Takedown - Cinemood";
+      description = "Read our official legal terms and DMCA compliance guidelines. Cinemood does not host any movie files or media files onto local storage setups.";
+      keywords = "disclaimer cinemood, dmca takedown guidelines, copyright report, non hosting policy";
+      canonicalPath = "/disclaimer";
     }
 
     // 3. Update Standard HTML Head Tags

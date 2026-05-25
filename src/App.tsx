@@ -18,6 +18,10 @@ import { DetailPage } from "./pages/DetailPage";
 import { DownloadPage } from "./pages/DownloadPage";
 import { SearchPage } from "./pages/SearchPage";
 import { BookmarksPage } from "./pages/BookmarksPage";
+import { AboutPage } from "./pages/AboutPage";
+import { PrivacyPage } from "./pages/PrivacyPage";
+import { ContactPage } from "./pages/ContactPage";
+import { DisclaimerPage } from "./pages/DisclaimerPage";
 
 import { motion, AnimatePresence } from "motion/react";
 
@@ -37,6 +41,14 @@ const AppContent: React.FC = () => {
         return <SearchPage />;
       case "bookmarks":
         return <BookmarksPage />;
+      case "about":
+        return <AboutPage />;
+      case "privacy":
+        return <PrivacyPage />;
+      case "contact":
+        return <ContactPage />;
+      case "disclaimer":
+        return <DisclaimerPage />;
       default:
         return <Home />;
     }
