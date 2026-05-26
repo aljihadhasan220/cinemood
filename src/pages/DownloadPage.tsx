@@ -110,7 +110,7 @@ export const DownloadPage: React.FC = () => {
               const localUrl = movie.downloadLinks?.find(l => l.serverName.toLowerCase().includes("1080"))?.url 
                 || movie.downloadLinks?.[0]?.url 
                 || `https://gofile.io/d/cinemood-${movie.id}-1080p`;
-              if (movie.id === "new-gods-yang-jian-2022" || movie.id === "madhuvidhu-2026" || movie.id === "chand-mera-dil-2026" || movie.id === "bonolota-express-2026" || movie.id === "drishyam-3-2026") {
+              if (movie.id === "new-gods-yang-jian-2022" || movie.id === "madhuvidhu-2026" || movie.id === "chand-mera-dil-2026" || movie.id === "bonolota-express-2026" || movie.id === "drishyam-3-2026" || movie.id === "absolute-value-of-romance-season-1") {
                 setSelectedMirror(localUrl);
                 window.open("https://eternalwheeled.com/nb8tim21p?key=14ec617a43996791d6944be87909a459", "_blank", "noopener,noreferrer");
                 window.location.href = localUrl;
@@ -142,7 +142,7 @@ export const DownloadPage: React.FC = () => {
               const localUrl = movie.downloadLinks?.find(l => l.serverName.toLowerCase().includes("720"))?.url 
                 || movie.downloadLinks?.[1]?.url 
                 || `https://gofile.io/d/cinemood-${movie.id}-720p`;
-              if (movie.id === "new-gods-yang-jian-2022" || movie.id === "madhuvidhu-2026" || movie.id === "chand-mera-dil-2026" || movie.id === "bonolota-express-2026" || movie.id === "drishyam-3-2026") {
+              if (movie.id === "new-gods-yang-jian-2022" || movie.id === "madhuvidhu-2026" || movie.id === "chand-mera-dil-2026" || movie.id === "bonolota-express-2026" || movie.id === "drishyam-3-2026" || movie.id === "absolute-value-of-romance-season-1") {
                 setSelectedMirror(localUrl);
                 window.open("https://eternalwheeled.com/nb8tim21p?key=14ec617a43996791d6944be87909a459", "_blank", "noopener,noreferrer");
                 window.location.href = localUrl;
@@ -174,7 +174,7 @@ export const DownloadPage: React.FC = () => {
               const localUrl = movie.downloadLinks?.find(l => l.serverName.toLowerCase().includes("480"))?.url 
                 || movie.downloadLinks?.[2]?.url 
                 || `https://gofile.io/d/cinemood-${movie.id}-480p`;
-              if (movie.id === "new-gods-yang-jian-2022" || movie.id === "madhuvidhu-2026" || movie.id === "chand-mera-dil-2026" || movie.id === "bonolota-express-2026" || movie.id === "drishyam-3-2026") {
+              if (movie.id === "new-gods-yang-jian-2022" || movie.id === "madhuvidhu-2026" || movie.id === "chand-mera-dil-2026" || movie.id === "bonolota-express-2026" || movie.id === "drishyam-3-2026" || movie.id === "absolute-value-of-romance-season-1") {
                 setSelectedMirror(localUrl);
                 window.open("https://eternalwheeled.com/nb8tim21p?key=14ec617a43996791d6944be87909a459", "_blank", "noopener,noreferrer");
                 window.location.href = localUrl;

@@ -12,6 +12,7 @@ export const Home: React.FC = () => {
 
   const [trending, setTrending] = useState<Movie[]>([]);
   const [latest, setLatest] = useState<Movie[]>([]);
+  const [latestSeries, setLatestSeries] = useState<Movie[]>([]);
 
   useEffect(() => {
     if (allMovies.length === 0) return;
@@ -19,6 +20,7 @@ export const Home: React.FC = () => {
     // Distribute data correctly based on categories & year
     setTrending(allMovies.filter(m => m.categories.includes("trending")));
     setLatest(allMovies.filter(m => m.categories.includes("latest")));
+    setLatestSeries(allMovies.filter(m => m.categories.includes("web-series")));
   }, [allMovies]);
 
   return (
@@ -68,6 +70,21 @@ export const Home: React.FC = () => {
             title="Latest Movies"
             subtitle="Newly encoded multi-audio and HD quality stream prints"
             movies={latest}
+            loading={isLoading}
+          />
+        </motion.div>
+
+        {/* Latest Series */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+        >
+          <MovieGrid
+            title="Latest Series"
+            subtitle="Premium TV Shows and Multi-Audio Seasons newly updated"
+            movies={latestSeries}
             loading={isLoading}
           />
         </motion.div>

@@ -38,7 +38,8 @@ try {
     "latest-uploads",
     "hollywood-movies",
     "south-indian-movies",
-    "malayalam-movies"
+    "malayalam-movies",
+    "korean-drama"
   ];
 
   const categoryPages = categories.map(cat => ({

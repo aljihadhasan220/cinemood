@@ -73,6 +73,16 @@ const MOVIES_DATABASE: Movie[] = [...(moviesData as any[])].reverse().map(item =
     if (!categoriesArray.includes("netflix-series")) categoriesArray.push("netflix-series");
   }
 
+  // Korean Drama classification
+  if (
+    langLower.includes("korean") || 
+    titleLower.includes("korean") || 
+    descLower.includes("korean")
+  ) {
+    if (!categoriesArray.includes("korean-drama")) categoriesArray.push("korean-drama");
+    if (!categoriesArray.includes("korean")) categoriesArray.push("korean");
+  }
+
   return {
     id: item.id,
     title: item.title,

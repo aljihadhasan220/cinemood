@@ -62,6 +62,8 @@ export const SearchPage: React.FC = () => {
             results = results.filter(m => m.language.toLowerCase().includes("hindi") || m.title.toLowerCase().includes("south") || m.id.toString().includes("mayabi"));
           } else if (lCat === "malayalam-movies" || lCat === "malayalam") {
             results = results.filter(m => m.language.toLowerCase().includes("malayalam") || m.categories.includes("malayalam-movies") || m.categories.includes("malayalam"));
+          } else if (lCat === "korean-drama" || lCat === "korean") {
+            results = results.filter(m => m.language.toLowerCase().includes("korean") || m.categories.includes("korean-drama") || m.categories.includes("korean"));
           }
         }
         
@@ -117,6 +119,9 @@ export const SearchPage: React.FC = () => {
       case "malayalam-movies":
       case "malayalam":
         return { title: "Malayalam Movies HD Free Downloads", subtitle: "Download thrilling Malayalam movie encodes with fast speed Gofile links." };
+      case "korean-drama":
+      case "korean":
+        return { title: "Korean Drama Series in Hindi Archive", subtitle: "Download complete Korean romance, thriller, and action-comedy series in Hindi Dual Audio." };
       default:
         const nameClean = activeCategory.split("-").map(p => p.charAt(0).toUpperCase() + p.slice(1)).join(" ");
         return { title: `${nameClean} Archive`, subtitle: `Superfast direct files and crawlable indices for ${nameClean} collections.` };

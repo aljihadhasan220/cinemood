@@ -87,6 +87,10 @@ export const SEOManager: React.FC = () => {
           title = "Malayalam Movies HD Free Direct Download – Cinemood";
           description = "Download Malayalam thrillers and dramatic blockbusters with superfast direct links in 480p, 720p, and 1080p high quality encodes.";
           keywords = "Malayalam movies download, Malayalam cinema Gofile, Drishyam download, Malayalam thrillers Free download";
+        } else if (activeCategory === "korean-drama" || activeCategory === "korean") {
+          title = "Korean Drama Series Dual Audio Free Download – Cinemood";
+          description = "Download Korean romance and thrilling drama shows in Hindi Dual Audio with superfast direct storage links. Premium quality HEVC encodes.";
+          keywords = "Korean drama series download, K-Drama Hindi dubbed, Absolute Value of Romance download, Gofile K-Drama Hindi";
         } else {
           title = `${cleanCat} Movie Archives & Direct Downloads – Cinemood`;
           description = `Free high speed downloads and stream references for ${cleanCat} files. Complete catalog of high quality 4K and 1080p prints.`;

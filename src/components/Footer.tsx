@@ -87,6 +87,13 @@ export const Footer: React.FC = () => {
               >
                 Malayalam Movies &amp; Thrillers
               </a>
+              <a
+                href="/category/korean-drama"
+                onClick={(e) => { e.preventDefault(); handleCategoryClick("All", "korean-drama"); }}
+                className="hover:text-brand-red transition-colors text-left"
+              >
+                Korean Drama &amp; Series
+              </a>
             </div>
           </div>
 
