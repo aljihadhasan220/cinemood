@@ -94,6 +94,13 @@ export const Footer: React.FC = () => {
               >
                 Korean Drama &amp; Series
               </a>
+              <a
+                href="/category/hindi-series"
+                onClick={(e) => { e.preventDefault(); handleCategoryClick("All", "hindi-series"); }}
+                className="hover:text-brand-red transition-colors text-left"
+              >
+                Hindi Series &amp; Shows
+              </a>
             </div>
           </div>
 

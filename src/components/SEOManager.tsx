@@ -91,6 +91,10 @@ export const SEOManager: React.FC = () => {
           title = "Korean Drama Series Dual Audio Free Download – Cinemood";
           description = "Download Korean romance and thrilling drama shows in Hindi Dual Audio with superfast direct storage links. Premium quality HEVC encodes.";
           keywords = "Korean drama series download, K-Drama Hindi dubbed, Absolute Value of Romance download, Gofile K-Drama Hindi";
+        } else if (activeCategory === "hindi-series") {
+          title = "Hindi Web Series & Seasons Free Download – Cinemood";
+          description = "Download Hindi original web series, complete season packages, and dual audio thriller shows with superfast Gofile and GDrive links.";
+          keywords = "Hindi web series download, Hindi season pack, Hollywood drama series in Hindi, Gofile Hindi Series";
         } else {
           title = `${cleanCat} Movie Archives & Direct Downloads – Cinemood`;
           description = `Free high speed downloads and stream references for ${cleanCat} files. Complete catalog of high quality 4K and 1080p prints.`;

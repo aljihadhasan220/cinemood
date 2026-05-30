@@ -64,6 +64,8 @@ export const SearchPage: React.FC = () => {
             results = results.filter(m => m.language.toLowerCase().includes("malayalam") || m.categories.includes("malayalam-movies") || m.categories.includes("malayalam"));
           } else if (lCat === "korean-drama" || lCat === "korean") {
             results = results.filter(m => m.language.toLowerCase().includes("korean") || m.categories.includes("korean-drama") || m.categories.includes("korean"));
+          } else if (lCat === "hindi-series") {
+            results = results.filter(m => (m.language.toLowerCase().includes("hindi") && m.categories.includes("web-series")) || m.categories.includes("hindi-series"));
           }
         }
         
@@ -122,6 +124,8 @@ export const SearchPage: React.FC = () => {
       case "korean-drama":
       case "korean":
         return { title: "Korean Drama Series in Hindi Archive", subtitle: "Download complete Korean romance, thriller, and action-comedy series in Hindi Dual Audio." };
+      case "hindi-series":
+        return { title: "Hindi Season Packs & Web Series Archive", subtitle: "Download complete Hindi and dual-audio web series, season packs, and original drama shows containing fast Gofile storage mirrors." };
       default:
         const nameClean = activeCategory.split("-").map(p => p.charAt(0).toUpperCase() + p.slice(1)).join(" ");
         return { title: `${nameClean} Archive`, subtitle: `Superfast direct files and crawlable indices for ${nameClean} collections.` };

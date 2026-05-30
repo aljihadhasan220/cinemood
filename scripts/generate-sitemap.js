@@ -39,7 +39,8 @@ try {
     "hollywood-movies",
     "south-indian-movies",
     "malayalam-movies",
-    "korean-drama"
+    "korean-drama",
+    "hindi-series"
   ];
 
   const categoryPages = categories.map(cat => ({
