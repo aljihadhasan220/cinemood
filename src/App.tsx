@@ -11,6 +11,7 @@ import { FloatingTelegram } from "./components/FloatingTelegram";
 import { TrailerPopup } from "./components/TrailerPopup";
 import { SEOManager } from "./components/SEOManager";
 import { PopunderManager } from "./components/PopunderManager";
+import { BackButtonAdManager } from "./components/BackButtonAdManager";
 
 // Pages
 import { Home } from "./pages/Home";
@@ -62,6 +63,9 @@ const AppContent: React.FC = () => {
 
       {/* Adsterra Non-Intrusive Popunder Manager */}
       <PopunderManager />
+
+      {/* Lightweight Back Button Ad Interceptor */}
+      <BackButtonAdManager />
 
       {/* Dynamic Crimson Ambient Glow behind Layout Header */}
       <div className="pointer-events-none absolute top-0 left-0 w-full h-[500px] bg-gradient-to-b from-[#e5091422] to-transparent opacity-40 z-0" />
