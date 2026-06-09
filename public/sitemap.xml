@@ -3,19 +3,19 @@
   <!-- Core Layout Routes -->
   <url>
     <loc>https://cinemood.site/</loc>
-    <lastmod>2026-06-07</lastmod>
+    <lastmod>2026-06-09</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://cinemood.site/search</loc>
-    <lastmod>2026-06-07</lastmod>
+    <lastmod>2026-06-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://cinemood.site/bookmarks</loc>
-    <lastmod>2026-06-07</lastmod>
+    <lastmod>2026-06-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.3</priority>
   </url>
@@ -23,73 +23,73 @@
   <!-- Categorical Index Targets -->
   <url>
     <loc>https://cinemood.site/category/bengali-movies</loc>
-    <lastmod>2026-06-07</lastmod>
+    <lastmod>2026-06-09</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://cinemood.site/category/web-series</loc>
-    <lastmod>2026-06-07</lastmod>
+    <lastmod>2026-06-09</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://cinemood.site/category/anime</loc>
-    <lastmod>2026-06-07</lastmod>
+    <lastmod>2026-06-09</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://cinemood.site/category/dual-audio</loc>
-    <lastmod>2026-06-07</lastmod>
+    <lastmod>2026-06-09</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://cinemood.site/category/bangla-dubbed</loc>
-    <lastmod>2026-06-07</lastmod>
+    <lastmod>2026-06-09</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://cinemood.site/category/trending-movies</loc>
-    <lastmod>2026-06-07</lastmod>
+    <lastmod>2026-06-09</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://cinemood.site/category/latest-uploads</loc>
-    <lastmod>2026-06-07</lastmod>
+    <lastmod>2026-06-09</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://cinemood.site/category/hollywood-movies</loc>
-    <lastmod>2026-06-07</lastmod>
+    <lastmod>2026-06-09</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://cinemood.site/category/south-indian-movies</loc>
-    <lastmod>2026-06-07</lastmod>
+    <lastmod>2026-06-09</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://cinemood.site/category/malayalam-movies</loc>
-    <lastmod>2026-06-07</lastmod>
+    <lastmod>2026-06-09</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://cinemood.site/category/korean-drama</loc>
-    <lastmod>2026-06-07</lastmod>
+    <lastmod>2026-06-09</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://cinemood.site/category/hindi-series</loc>
-    <lastmod>2026-06-07</lastmod>
+    <lastmod>2026-06-09</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.9</priority>
   </url>
@@ -97,157 +97,163 @@
   <!-- Movie Detail Pages (Crawlable) -->
   <url>
     <loc>https://cinemood.site/movie/dhumketu-2025</loc>
-    <lastmod>2026-06-07</lastmod>
+    <lastmod>2026-06-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
     <loc>https://cinemood.site/movie/domm-2026</loc>
-    <lastmod>2026-06-07</lastmod>
+    <lastmod>2026-06-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
     <loc>https://cinemood.site/movie/dhurandhar-the-revenge-2026</loc>
-    <lastmod>2026-06-07</lastmod>
+    <lastmod>2026-06-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
     <loc>https://cinemood.site/movie/aakhri-sawal-2026</loc>
-    <lastmod>2026-06-07</lastmod>
+    <lastmod>2026-06-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
     <loc>https://cinemood.site/movie/rakkhosh-2026</loc>
-    <lastmod>2026-06-07</lastmod>
+    <lastmod>2026-06-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
     <loc>https://cinemood.site/movie/prince-once-upon-a-time-in-dhaka-2026</loc>
-    <lastmod>2026-06-07</lastmod>
+    <lastmod>2026-06-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
     <loc>https://cinemood.site/movie/new-gods-yang-jian-2022</loc>
-    <lastmod>2026-06-07</lastmod>
+    <lastmod>2026-06-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
     <loc>https://cinemood.site/movie/madhuvidhu-2026</loc>
-    <lastmod>2026-06-07</lastmod>
+    <lastmod>2026-06-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
     <loc>https://cinemood.site/movie/chand-mera-dil-2026</loc>
-    <lastmod>2026-06-07</lastmod>
+    <lastmod>2026-06-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
     <loc>https://cinemood.site/movie/bonolota-express-2026</loc>
-    <lastmod>2026-06-07</lastmod>
+    <lastmod>2026-06-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
     <loc>https://cinemood.site/movie/drishyam-3-2026</loc>
-    <lastmod>2026-06-07</lastmod>
+    <lastmod>2026-06-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
     <loc>https://cinemood.site/movie/absolute-value-of-romance-season-1</loc>
-    <lastmod>2026-06-07</lastmod>
+    <lastmod>2026-06-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
     <loc>https://cinemood.site/movie/kara-2026</loc>
-    <lastmod>2026-06-07</lastmod>
+    <lastmod>2026-06-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
     <loc>https://cinemood.site/movie/tajmahal-2026</loc>
-    <lastmod>2026-06-07</lastmod>
+    <lastmod>2026-06-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
     <loc>https://cinemood.site/movie/s-line-2026-s01</loc>
-    <lastmod>2026-06-07</lastmod>
+    <lastmod>2026-06-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
     <loc>https://cinemood.site/movie/trigger-2025-s01</loc>
-    <lastmod>2026-06-07</lastmod>
+    <lastmod>2026-06-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
     <loc>https://cinemood.site/movie/voyal-2026</loc>
-    <lastmod>2026-06-07</lastmod>
+    <lastmod>2026-06-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
     <loc>https://cinemood.site/movie/kattalan-2026</loc>
-    <lastmod>2026-06-07</lastmod>
+    <lastmod>2026-06-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
     <loc>https://cinemood.site/movie/doraemon-the-movie-nobitas-little-star-wars-2021-2022</loc>
-    <lastmod>2026-06-07</lastmod>
+    <lastmod>2026-06-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
     <loc>https://cinemood.site/movie/classroom-of-the-elite-season-1-3</loc>
-    <lastmod>2026-06-07</lastmod>
+    <lastmod>2026-06-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
     <loc>https://cinemood.site/movie/spider-noir-season-1</loc>
-    <lastmod>2026-06-07</lastmod>
+    <lastmod>2026-06-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
     <loc>https://cinemood.site/movie/rockstar-2026-bengali</loc>
-    <lastmod>2026-06-07</lastmod>
+    <lastmod>2026-06-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
     <loc>https://cinemood.site/movie/peddi-2026-dual-audio</loc>
-    <lastmod>2026-06-07</lastmod>
+    <lastmod>2026-06-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
     <loc>https://cinemood.site/movie/patriot-2026</loc>
-    <lastmod>2026-06-07</lastmod>
+    <lastmod>2026-06-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
     <loc>https://cinemood.site/movie/29-2026</loc>
-    <lastmod>2026-06-07</lastmod>
+    <lastmod>2026-06-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
     <loc>https://cinemood.site/movie/iccheta-je-here-geche-2026</loc>
-    <lastmod>2026-06-07</lastmod>
+    <lastmod>2026-06-09</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://cinemood.site/movie/michael-2026</loc>
+    <lastmod>2026-06-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
@@ -255,157 +261,163 @@
   <!-- Movie Download Mirror Indexes -->
   <url>
     <loc>https://cinemood.site/download/dhumketu-2025</loc>
-    <lastmod>2026-06-07</lastmod>
+    <lastmod>2026-06-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cinemood.site/download/domm-2026</loc>
-    <lastmod>2026-06-07</lastmod>
+    <lastmod>2026-06-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cinemood.site/download/dhurandhar-the-revenge-2026</loc>
-    <lastmod>2026-06-07</lastmod>
+    <lastmod>2026-06-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cinemood.site/download/aakhri-sawal-2026</loc>
-    <lastmod>2026-06-07</lastmod>
+    <lastmod>2026-06-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cinemood.site/download/rakkhosh-2026</loc>
-    <lastmod>2026-06-07</lastmod>
+    <lastmod>2026-06-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cinemood.site/download/prince-once-upon-a-time-in-dhaka-2026</loc>
-    <lastmod>2026-06-07</lastmod>
+    <lastmod>2026-06-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cinemood.site/download/new-gods-yang-jian-2022</loc>
-    <lastmod>2026-06-07</lastmod>
+    <lastmod>2026-06-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cinemood.site/download/madhuvidhu-2026</loc>
-    <lastmod>2026-06-07</lastmod>
+    <lastmod>2026-06-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cinemood.site/download/chand-mera-dil-2026</loc>
-    <lastmod>2026-06-07</lastmod>
+    <lastmod>2026-06-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cinemood.site/download/bonolota-express-2026</loc>
-    <lastmod>2026-06-07</lastmod>
+    <lastmod>2026-06-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cinemood.site/download/drishyam-3-2026</loc>
-    <lastmod>2026-06-07</lastmod>
+    <lastmod>2026-06-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cinemood.site/download/absolute-value-of-romance-season-1</loc>
-    <lastmod>2026-06-07</lastmod>
+    <lastmod>2026-06-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cinemood.site/download/kara-2026</loc>
-    <lastmod>2026-06-07</lastmod>
+    <lastmod>2026-06-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cinemood.site/download/tajmahal-2026</loc>
-    <lastmod>2026-06-07</lastmod>
+    <lastmod>2026-06-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cinemood.site/download/s-line-2026-s01</loc>
-    <lastmod>2026-06-07</lastmod>
+    <lastmod>2026-06-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cinemood.site/download/trigger-2025-s01</loc>
-    <lastmod>2026-06-07</lastmod>
+    <lastmod>2026-06-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cinemood.site/download/voyal-2026</loc>
-    <lastmod>2026-06-07</lastmod>
+    <lastmod>2026-06-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cinemood.site/download/kattalan-2026</loc>
-    <lastmod>2026-06-07</lastmod>
+    <lastmod>2026-06-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cinemood.site/download/doraemon-the-movie-nobitas-little-star-wars-2021-2022</loc>
-    <lastmod>2026-06-07</lastmod>
+    <lastmod>2026-06-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cinemood.site/download/classroom-of-the-elite-season-1-3</loc>
-    <lastmod>2026-06-07</lastmod>
+    <lastmod>2026-06-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cinemood.site/download/spider-noir-season-1</loc>
-    <lastmod>2026-06-07</lastmod>
+    <lastmod>2026-06-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cinemood.site/download/rockstar-2026-bengali</loc>
-    <lastmod>2026-06-07</lastmod>
+    <lastmod>2026-06-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cinemood.site/download/peddi-2026-dual-audio</loc>
-    <lastmod>2026-06-07</lastmod>
+    <lastmod>2026-06-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cinemood.site/download/patriot-2026</loc>
-    <lastmod>2026-06-07</lastmod>
+    <lastmod>2026-06-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cinemood.site/download/29-2026</loc>
-    <lastmod>2026-06-07</lastmod>
+    <lastmod>2026-06-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://cinemood.site/download/iccheta-je-here-geche-2026</loc>
-    <lastmod>2026-06-07</lastmod>
+    <lastmod>2026-06-09</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://cinemood.site/download/michael-2026</loc>
+    <lastmod>2026-06-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
