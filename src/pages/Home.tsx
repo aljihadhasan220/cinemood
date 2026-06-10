@@ -18,7 +18,9 @@ export const Home: React.FC = () => {
     if (allMovies.length === 0) return;
 
     // Distribute data correctly based on categories & year
-    setTrending(allMovies.filter(m => m.categories.includes("trending")));
+    const trendingFiltered = allMovies.filter(m => m.categories.includes("trending"));
+    const trendingSorted = [...trendingFiltered].sort((a, b) => b.imdbRating - a.imdbRating);
+    setTrending(trendingSorted);
     setLatest(allMovies.filter(m => m.categories.includes("latest")));
     setLatestSeries(allMovies.filter(m => m.categories.includes("web-series")));
   }, [allMovies]);
