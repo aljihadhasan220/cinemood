@@ -6,38 +6,65 @@ import sharp from 'sharp';
 const svgLogo = `
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
   <defs>
-    <!-- Premium Cinemood Red gradient matching original brand styling -->
-    <linearGradient id="redGrad" x1="0%" y1="0%" x2="0%" y2="100%">
-      <stop offset="0%" stop-color="#E50914" />
-      <stop offset="100%" stop-color="#9C050B" />
+    <!-- Background Gradient for the 3D button body -->
+    <linearGradient id="redBase" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ff1a25" />
+      <stop offset="12%" stop-color="#df050d" />
+      <stop offset="65%" stop-color="#b00207" />
+      <stop offset="100%" stop-color="#690002" />
+    </linearGradient>
+    
+    <!-- Outer rim bevel highlight -->
+    <linearGradient id="outerBevel" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ff525b" />
+      <stop offset="100%" stop-color="#2a0001" />
+    </linearGradient>
+
+    <!-- Glass gloss gradient -->
+    <linearGradient id="glossGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.38" />
+      <stop offset="35%" stop-color="#ffffff" stop-opacity="0.18" />
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0.0" />
+    </linearGradient>
+
+    <!-- Recessed theater screen gradient -->
+    <linearGradient id="screenBase" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#b80006" />
+      <stop offset="100%" stop-color="#4e0002" />
     </linearGradient>
   </defs>
   
-  <!-- Main Rounded Rect (the glossy/vibrant base wrapper) with circular/squircle rounding -->
-  <rect x="16" y="16" width="480" height="480" rx="120" fill="url(#redGrad)" />
+  <!-- Outer Bevel Frame (creating a beautiful 3D border) -->
+  <rect x="20" y="76" width="472" height="360" rx="98" fill="url(#outerBevel)" />
+  
+  <!-- Main Red Button Body -->
+  <rect x="24" y="80" width="464" height="352" rx="94" fill="url(#redBase)" />
   
   <!-- Film Strip solid white background structure -->
-  <rect x="80" y="110" width="352" height="292" rx="40" fill="#ffffff" />
+  <rect x="86" y="136" width="340" height="240" rx="32" fill="#ffffff" />
   
-  <!-- Dark cinematic screen overlay in the center defining the theater display -->
-  <rect x="160" y="130" width="192" height="252" rx="16" fill="url(#redGrad)" />
+  <!-- Dark cinematic screen overlay in the center -->
+  <rect x="166" y="154" width="180" height="204" rx="16" fill="url(#screenBase)" />
   
-  <!-- Left Sprocket Holes: 5 mathematically aligned horizontally-oriented red holes -->
-  <rect x="104" y="150" width="32" height="20" rx="6" fill="url(#redGrad)" />
-  <rect x="104" y="198" width="32" height="20" rx="6" fill="url(#redGrad)" />
-  <rect x="104" y="246" width="32" height="20" rx="6" fill="url(#redGrad)" />
-  <rect x="104" y="294" width="32" height="20" rx="6" fill="url(#redGrad)" />
-  <rect x="104" y="342" width="32" height="20" rx="6" fill="url(#redGrad)" />
+  <!-- Left Sprocket Holes: 5 mathematically aligned vertical rounded rects -->
+  <rect x="117" y="155" width="18" height="28" rx="4" fill="url(#redBase)" />
+  <rect x="117" y="199" width="18" height="28" rx="4" fill="url(#redBase)" />
+  <rect x="117" y="243" width="18" height="28" rx="4" fill="url(#redBase)" />
+  <rect x="117" y="287" width="18" height="28" rx="4" fill="url(#redBase)" />
+  <rect x="117" y="331" width="18" height="28" rx="4" fill="url(#redBase)" />
   
-  <!-- Right Sprocket Holes: 5 mathematically aligned horizontal red holes -->
-  <rect x="376" y="150" width="32" height="20" rx="6" fill="url(#redGrad)" />
-  <rect x="376" y="198" width="32" height="20" rx="6" fill="url(#redGrad)" />
-  <rect x="376" y="246" width="32" height="20" rx="6" fill="url(#redGrad)" />
-  <rect x="376" y="294" width="32" height="20" rx="6" fill="url(#redGrad)" />
-  <rect x="376" y="342" width="32" height="20" rx="6" fill="url(#redGrad)" />
+  <!-- Right Sprocket Holes: 5 mathematically aligned vertical rounded rects -->
+  <rect x="377" y="155" width="18" height="28" rx="4" fill="url(#redBase)" />
+  <rect x="377" y="199" width="18" height="28" rx="4" fill="url(#redBase)" />
+  <rect x="377" y="243" width="18" height="28" rx="4" fill="url(#redBase)" />
+  <rect x="377" y="287" width="18" height="28" rx="4" fill="url(#redBase)" />
+  <rect x="377" y="331" width="18" height="28" rx="4" fill="url(#redBase)" />
   
-  <!-- Centered Play Button (crisp equilateral triangle pointing right) -->
-  <polygon points="224,196 312,256 224,316" fill="#ffffff" />
+  <!-- Centered Play Button (crisp triangle pointing right) -->
+  <polygon points="228,212 298,256 228,300" fill="#ffffff" />
+
+  <!-- Glass Gloss Overlay -->
+  <path d="M 24,174 C 24,122 66,80 118,80 L 394,80 C 446,80 488,122 488,174 L 488,216 C 362,250 150,250 24,216 Z" fill="url(#glossGrad)" />
 </svg>
 `;
 
