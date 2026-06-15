@@ -15,15 +15,14 @@ export const MovieCard: React.FC<MovieCardProps> = ({ movie }) => {
   return (
     <motion.div
       id={`movie-card-${movie.id}`}
-      layout
-      initial={{ opacity: 0, scale: 0.95 }}
-      animate={{ opacity: 1, scale: 1 }}
-      exit={{ opacity: 0, scale: 0.95 }}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
       whileHover={{ y: -6 }}
-      transition={{ duration: 0.3 }}
+      transition={{ duration: 0.2 }}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
-      className="relative flex flex-col overflow-hidden rounded-2xl bg-white/5 border border-white/5 group cursor-pointer shadow-lg hover:border-brand-red/30 transition-all select-none"
+      className="relative flex flex-col overflow-hidden rounded-2xl bg-white/5 border border-white/5 group cursor-pointer shadow-lg hover:border-brand-red/30 transition-all select-none will-change-transform"
     >
       {/* Aspect Ratio 2:3 Poster Frame */}
       <a 

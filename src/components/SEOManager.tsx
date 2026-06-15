@@ -11,7 +11,7 @@ export const SEOManager: React.FC = () => {
       : null;
 
     // 2. Determine SEO attributes based on page context
-    let title = "Cinemood - HD Movie Downloads | Bengali Movies, Dual Audio & Web Series";
+    let title = "Cinemood - Download & Watch Latest Movies, Series & Anime in HD";
     let description = "Cinemood is a premium dynamic movie indexing and metadata platform. Enjoy high-speed Gofile direct downloads and online streams for latest Bengali movies, web series, custom dual audio tracks, and kids anime.";
     let keywords = "HD movie downloads, Bengali movies, Web series, Dual audio movies, Watch online, Fast download movies, MLSBD, Cinemood, torrent, index archive, gofile links";
     let canonicalPath = "/";
@@ -22,7 +22,7 @@ export const SEOManager: React.FC = () => {
     const siteBase = "https://cinemood.site";
 
     if (view === "home") {
-      title = "Cinemood - HD Movie Downloads | Bengali Movies, Dual Audio & Web Series";
+      title = "Cinemood - Download & Watch Latest Movies, Series & Anime in HD";
       description = "Cinemood is a premium movie indexing and archive catalog. Superfast direct Gofile downloads, Bangla dubbed series, anime sagas, and dual-audio blockbusters instantly. No redirects or intrusive popups.";
       canonicalPath = "/";
       ogImage = activeMovie?.poster || "https://images.unsplash.com/photo-1536440136628-849c177e76a1?auto=format&fit=crop&q=80&w=1200&h=630";

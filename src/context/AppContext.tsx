@@ -349,38 +349,50 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
   };
 
   // Helper function to smooth switch views
-  const navigateToMovie = (movieId: string, targetView: ViewType = "detail") => {
+  const navigateToMovie = React.useCallback((movieId: string, targetView: ViewType = "detail") => {
     setSelectedMovieId(movieId);
     setView(targetView);
-  };
+  }, []);
+
+  const contextValue = React.useMemo(() => ({
+    view,
+    setView,
+    selectedMovieId,
+    setSelectedMovieId,
+    searchQuery,
+    setSearchQuery,
+    filters,
+    setFilters,
+    bookmarks,
+    toggleBookmark,
+    isBookmarked,
+    continueWatching,
+    addContinueWatching,
+    clearContinueWatching,
+    activeTrailerId,
+    setActiveTrailerId,
+    allMovies,
+    isLoading,
+    refreshMovies: fetchMovies,
+    navigateToMovie,
+    activeCategory,
+    setActiveCategory
+  }), [
+    view,
+    selectedMovieId,
+    searchQuery,
+    filters,
+    bookmarks,
+    continueWatching,
+    activeTrailerId,
+    allMovies,
+    isLoading,
+    activeCategory,
+    navigateToMovie
+  ]);
 
   return (
-    <AppContext.Provider
-      value={{
-        view,
-        setView,
-        selectedMovieId,
-        setSelectedMovieId,
-        searchQuery,
-        setSearchQuery,
-        filters,
-        setFilters,
-        bookmarks,
-        toggleBookmark,
-        isBookmarked,
-        continueWatching,
-        addContinueWatching,
-        clearContinueWatching,
-        activeTrailerId,
-        setActiveTrailerId,
-        allMovies,
-        isLoading,
-        refreshMovies: fetchMovies,
-        navigateToMovie,
-        activeCategory,
-        setActiveCategory
-      }}
-    >
+    <AppContext.Provider value={contextValue}>
       {children}
     </AppContext.Provider>
   );

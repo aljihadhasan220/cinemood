@@ -31,7 +31,10 @@ export const DetailPage: React.FC = () => {
     toggleBookmark,
     isBookmarked,
     addContinueWatching,
-    setActiveTrailerId
+    setActiveTrailerId,
+    setActiveCategory,
+    setFilters,
+    setSearchQuery
   } = useApp();
 
   const [movie, setMovie] = useState<Movie | null>(null);
@@ -259,6 +262,43 @@ export const DetailPage: React.FC = () => {
                   {(movie as any).fullTitle}
                 </div>
               )}
+              {/* Category & Genre Crawler-Ready Internal Links */}
+              <div className="flex flex-wrap items-center gap-2 pt-1">
+                {movie.genres.map((g, idx) => (
+                  <button
+                    key={`g-${idx}`}
+                    onClick={() => {
+                      setActiveCategory(null);
+                      setFilters({
+                        genre: g,
+                        year: "All",
+                        quality: "All",
+                        rating: 0
+                      });
+                      setSearchQuery("");
+                      setView("search");
+                    }}
+                    className="text-[11px] font-semibold px-2.5 py-1 rounded bg-[#141414] border border-white/5 text-neutral-400 hover:text-white hover:border-brand-red/40 transition-all cursor-pointer"
+                  >
+                    {g} Movie
+                  </button>
+                ))}
+                {movie.categories.map((c, idx) => {
+                  const label = c.split("-").map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(" ");
+                  return (
+                    <button
+                      key={`c-${idx}`}
+                      onClick={() => {
+                        setActiveCategory(c);
+                        setView("search");
+                      }}
+                      className="text-[11px] font-semibold px-2.5 py-1 rounded bg-brand-red/10 border border-brand-red/20 text-brand-red hover:bg-brand-red hover:text-white transition-all cursor-pointer"
+                    >
+                      {label} Archive
+                    </button>
+                  );
+                })}
+              </div>
             </div>
 
             <p className="text-sm md:text-base text-neutral-300 leading-relaxed max-w-3xl font-sans text-justify">

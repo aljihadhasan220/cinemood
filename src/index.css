@@ -9,6 +9,25 @@
   --color-brand-dark: #050505;
 }
 
+/* Global Smooth Scrolling and Performance tune-ups */
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 80px;
+  -webkit-text-size-adjust: 100%;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  text-rendering: optimizeSpeed;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* GPU Hardware Acceleration helper */
+.will-change-transform {
+  will-change: transform;
+}
+
 /* Custom premium scrollbar styling to sustain dark cinematic aesthetics */
 ::-webkit-scrollbar {
   width: 8px;
