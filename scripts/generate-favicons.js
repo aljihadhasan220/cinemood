@@ -2,47 +2,46 @@ import fs from 'fs';
 import path from 'path';
 import sharp from 'sharp';
 
-// 1. High-fidelity SVG of the Cinemood Logo
-// Red Rounded App icon backdrop with linear gradient, containing the centered white film strip and play button triangle.
+// High-fidelity SVG of the Cinemood Logo with balanced dimensions and coordinates
 const svgLogo = `
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="100%" height="100%">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
   <defs>
-    <!-- Soft Red-Gradient for Cinematic depth -->
-    <linearGradient id="redGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#ff1a24" />
-      <stop offset="100%" stop-color="#b5050b" />
+    <!-- Premium Cinemood Red gradient matching original brand styling -->
+    <linearGradient id="redGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#E50914" />
+      <stop offset="100%" stop-color="#9C050B" />
     </linearGradient>
   </defs>
-  <!-- Main Rounded Rect -->
-  <rect x="0" y="0" width="512" height="512" rx="110" ry="110" fill="url(#redGrad)" />
   
-  <!-- Film Strip Outer Wireframe Container -->
-  <rect x="80" y="100" width="352" height="312" rx="36" ry="36" fill="none" stroke="#ffffff" stroke-width="16" />
+  <!-- Main Rounded Rect (the glossy/vibrant base wrapper) with circular/squircle rounding -->
+  <rect x="16" y="16" width="480" height="480" rx="120" fill="url(#redGrad)" />
   
-  <!-- Vertical Dividers to isolate Sprocket Hole columns -->
-  <line x1="150" y1="100" x2="150" y2="412" stroke="#ffffff" stroke-width="16" />
-  <line x1="362" y1="100" x2="362" y2="412" stroke="#ffffff" stroke-width="16" />
+  <!-- Film Strip solid white background structure -->
+  <rect x="80" y="110" width="352" height="292" rx="40" fill="#ffffff" />
   
-  <!-- Left Sprocket Holes (rounded rects for high fidelity) -->
-  <rect x="104" y="128" width="22" height="32" rx="6" ry="6" fill="#ffffff" />
-  <rect x="104" y="184" width="22" height="32" rx="6" ry="6" fill="#ffffff" />
-  <rect x="104" y="240" width="22" height="32" rx="6" ry="6" fill="#ffffff" />
-  <rect x="104" y="296" width="22" height="32" rx="6" ry="6" fill="#ffffff" />
-  <rect x="104" y="352" width="22" height="32" rx="6" ry="6" fill="#ffffff" />
+  <!-- Dark cinematic screen overlay in the center defining the theater display -->
+  <rect x="160" y="130" width="192" height="252" rx="16" fill="url(#redGrad)" />
   
-  <!-- Right Sprocket Holes -->
-  <rect x="386" y="128" width="22" height="32" rx="6" ry="6" fill="#ffffff" />
-  <rect x="386" y="184" width="22" height="32" rx="6" ry="6" fill="#ffffff" />
-  <rect x="386" y="240" width="22" height="32" rx="6" ry="6" fill="#ffffff" />
-  <rect x="386" y="296" width="22" height="32" rx="6" ry="6" fill="#ffffff" />
-  <rect x="386" y="352" width="22" height="32" rx="6" ry="6" fill="#ffffff" />
+  <!-- Left Sprocket Holes: 5 mathematically aligned horizontally-oriented red holes -->
+  <rect x="104" y="150" width="32" height="20" rx="6" fill="url(#redGrad)" />
+  <rect x="104" y="198" width="32" height="20" rx="6" fill="url(#redGrad)" />
+  <rect x="104" y="246" width="32" height="20" rx="6" fill="url(#redGrad)" />
+  <rect x="104" y="294" width="32" height="20" rx="6" fill="url(#redGrad)" />
+  <rect x="104" y="342" width="32" height="20" rx="6" fill="url(#redGrad)" />
   
-  <!-- Crisp Centered Play Button Triangle -->
-  <path d="M 216 186 L 320 256 L 216 326 Z" fill="#ffffff" />
+  <!-- Right Sprocket Holes: 5 mathematically aligned horizontal red holes -->
+  <rect x="376" y="150" width="32" height="20" rx="6" fill="url(#redGrad)" />
+  <rect x="376" y="198" width="32" height="20" rx="6" fill="url(#redGrad)" />
+  <rect x="376" y="246" width="32" height="20" rx="6" fill="url(#redGrad)" />
+  <rect x="376" y="294" width="32" height="20" rx="6" fill="url(#redGrad)" />
+  <rect x="376" y="342" width="32" height="20" rx="6" fill="url(#redGrad)" />
+  
+  <!-- Centered Play Button (crisp equilateral triangle pointing right) -->
+  <polygon points="224,196 312,256 224,316" fill="#ffffff" />
 </svg>
 `;
 
-// 2. Binary Packager to generate a valid .ico file containing compressed PNG records
+// Helper: Binary Packager to generate a valid .ico file containing compressed PNG headers and data
 function createIco(pngBuffers) {
   const HEADER_SIZE = 6;
   const ENTRY_SIZE = 16;
@@ -86,8 +85,7 @@ async function run() {
 
   const svgBuffer = Buffer.from(svgLogo);
 
-  // Output all necessary widths to meet user expectations
-  console.log('Generating high-resolution PNG icon graphics...');
+  console.log('Generating high-resolution PNG icon graphics from the high-fidelity vector source...');
   
   const png16 = await sharp(svgBuffer).resize(16, 16).png().toBuffer();
   fs.writeFileSync(path.join(publicDir, 'favicon-16x16.png'), png16);
@@ -109,7 +107,6 @@ async function run() {
   fs.writeFileSync(path.join(publicDir, 'android-chrome-512x512.png'), png512);
   console.log('✔ android-chrome-512x512.png generated successfully.');
 
-  // Render multi-res ICO
   console.log('Generating packed favicon.ico containing 16px and 32px versions...');
   const icoData = createIco([
     { width: 16, data: png16 },
@@ -118,7 +115,7 @@ async function run() {
   fs.writeFileSync(path.join(publicDir, 'favicon.ico'), icoData);
   console.log('✔ favicon.ico completed successfully.');
 
-  // Create/overwrite site.webmanifest
+  // Create site.webmanifest
   const webManifest = {
     "name": "Cinemood",
     "short_name": "Cinemood",
