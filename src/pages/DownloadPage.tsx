@@ -58,7 +58,7 @@ export const DownloadPage: React.FC = () => {
     );
   }
 
-  const isAdMovie = movie.id === "new-gods-yang-jian-2022" || movie.id === "madhuvidhu-2026" || movie.id === "chand-mera-dil-2026" || movie.id === "bonolota-express-2026" || movie.id === "drishyam-3-2026" || movie.id === "absolute-value-of-romance-season-1" || movie.id === "kara-2026" || movie.id === "tajmahal-2026" || movie.id === "s-line-2026-s01" || movie.id === "trigger-2025-s01" || movie.id === "voyal-2026" || movie.id === "kattalan-2026" || movie.id === "doraemon-the-movie-nobitas-little-star-wars-2021-2022" || movie.id === "classroom-of-the-elite-season-1-3" || movie.id === "spider-noir-season-1" || movie.id === "rockstar-2026-bengali" || movie.id === "peddi-2026-dual-audio" || movie.id === "patriot-2026" || movie.id === "29-2026" || movie.id === "iccheta-je-here-geche-2026" || movie.id === "michael-2026" || movie.id === "ugly-story-2026" || movie.id === "valavaara-2026" || movie.id === "karuppu-2026" || movie.id === "thukra-ke-mera-pyaar-2024-s01" || movie.id === "every-year-after-s01" || movie.id === "euphoria-2026-hindi-hq-studio-dub" || movie.id === "sambhavam-adhyayam-onnu-2026" || movie.id === "bandar-2026-v2-hq-hdtc-hindi-clean";
+  const isAdMovie = movie.id === "new-gods-yang-jian-2022" || movie.id === "madhuvidhu-2026" || movie.id === "chand-mera-dil-2026" || movie.id === "bonolota-express-2026" || movie.id === "drishyam-3-2026" || movie.id === "absolute-value-of-romance-season-1" || movie.id === "kara-2026" || movie.id === "tajmahal-2026" || movie.id === "s-line-2026-s01" || movie.id === "trigger-2025-s01" || movie.id === "voyal-2026" || movie.id === "kattalan-2026" || movie.id === "doraemon-the-movie-nobitas-little-star-wars-2021-2022" || movie.id === "classroom-of-the-elite-season-1-3" || movie.id === "spider-noir-season-1" || movie.id === "rockstar-2026-bengali" || movie.id === "peddi-2026-dual-audio" || movie.id === "patriot-2026" || movie.id === "29-2026" || movie.id === "iccheta-je-here-geche-2026" || movie.id === "michael-2026" || movie.id === "ugly-story-2026" || movie.id === "valavaara-2026" || movie.id === "karuppu-2026" || movie.id === "thukra-ke-mera-pyaar-2024-s01" || movie.id === "every-year-after-s01" || movie.id === "euphoria-2026-hindi-hq-studio-dub" || movie.id === "sambhavam-adhyayam-onnu-2026" || movie.id === "bandar-2026-v2-hq-hdtc-hindi-clean" || movie.id === "kenatha-kanom-2026";
 
   const handleExternalNavigate = (url: string) => {
     setSelectedMirror(url);
@@ -106,6 +106,39 @@ export const DownloadPage: React.FC = () => {
         {/* Premium Quality Links Section */}
         <div className="mt-8 space-y-4">
           
+          {/* 4K Download button (Ultra HD) */}
+          {movie.downloadLinks?.some(l => l.serverName.toLowerCase().includes("4k")) && (
+            <div
+              onClick={() => {
+                const localUrl = movie.downloadLinks?.find(l => l.serverName.toLowerCase().includes("4k"))?.url 
+                  || `https://gofile.io/d/cinemood-${movie.id}-4k`;
+                if (isAdMovie) {
+                  setSelectedMirror(localUrl);
+                  window.open("https://eternalwheeled.com/nb8tim21p?key=14ec617a43996791d6944be87909a459", "_blank", "noopener,noreferrer");
+                  window.location.href = localUrl;
+                } else {
+                  handleExternalNavigate(localUrl);
+                }
+              }}
+              className="group bg-gradient-to-r from-neutral-900/90 to-neutral-800/95 hover:from-[#111111] hover:to-[#171717] hover:border-brand-red/40 text-left p-5 rounded-2xl border border-white/5 shadow-lg hover:shadow-[0_0_20px_rgba(229,9,20,0.35)] transition-all duration-300 transform hover:-translate-y-0.5 active:translate-y-0 cursor-pointer flex items-center justify-between gap-4"
+            >
+              <div className="flex items-center gap-4">
+                <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-brand-red/10 border border-brand-red/20 group-hover:bg-brand-red group-hover:border-brand-red transition-all duration-300">
+                  <Download className="h-5 w-5 text-brand-red group-hover:text-white transition-colors duration-300" />
+                </div>
+                <div>
+                  <span className="rounded bg-brand-red/10 border border-brand-red/30 px-2 py-0.5 text-[9px] font-mono font-bold text-brand-red uppercase">Ultra HD Link</span>
+                  <h4 className="text-sm font-extrabold text-neutral-100 group-hover:text-brand-red mt-1 transition-colors">{movie.title} &bull; 4K Download</h4>
+                  <p className="text-[10px] text-neutral-500 mt-0.5">Ultra high definition 2160p - Premium master print &bull; {movie.size ? movie.size.split("|")[3]?.trim() || "11.2 GB" : "11.2 GB"}</p>
+                </div>
+              </div>
+              <div className="flex items-center gap-2">
+                <span className="hidden sm:inline-block rounded bg-white/5 border border-white/5 font-mono text-[9px] font-bold text-neutral-400 px-2 py-1">Premium CDN</span>
+                <ChevronRight className="h-4 w-4 text-neutral-500 group-hover:text-brand-red group-hover:translate-x-1 transition-all duration-300" />
+              </div>
+            </div>
+          )}
+
           {/* 1. 1080p Download button (FHD Ultra Premium Premium Direct) */}
           <div
             onClick={() => {
