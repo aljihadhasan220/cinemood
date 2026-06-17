@@ -95,6 +95,10 @@ export const SEOManager: React.FC = () => {
           title = "Hindi Web Series & Seasons Free Download – Cinemood";
           description = "Download Hindi original web series, complete season packages, and dual audio thriller shows with superfast Gofile and GDrive links.";
           keywords = "Hindi web series download, Hindi season pack, Hollywood drama series in Hindi, Gofile Hindi Series";
+        } else if (activeCategory === "hindi-movies" || activeCategory === "hindi") {
+          title = "Hindi Movies Free Download & Direct Mirror Links – Cinemood";
+          description = "Download latest Hindi films, action Bollywood movies, and multi-resolution encodes with superfast direct Gofile and Google Drive mirrors.";
+          keywords = "Hindi movies download, Bollywood movies Gofile, free Hindi films download, direct download Hindi movies, Cinemood Hindi Movies";
         } else {
           title = `${cleanCat} Movie Archives & Direct Downloads – Cinemood`;
           description = `Free high speed downloads and stream references for ${cleanCat} files. Complete catalog of high quality 4K and 1080p prints.`;

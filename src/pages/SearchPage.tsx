@@ -66,6 +66,8 @@ export const SearchPage: React.FC = () => {
             results = results.filter(m => m.language.toLowerCase().includes("korean") || m.categories.includes("korean-drama") || m.categories.includes("korean"));
           } else if (lCat === "hindi-series") {
             results = results.filter(m => (m.language.toLowerCase().includes("hindi") && m.categories.includes("web-series")) || m.categories.includes("hindi-series"));
+          } else if (lCat === "hindi-movies" || lCat === "hindi") {
+            results = results.filter(m => m.language.toLowerCase().includes("hindi") && !m.categories.includes("web-series"));
           }
         }
         
