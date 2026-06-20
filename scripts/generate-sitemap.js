@@ -42,7 +42,9 @@ try {
     "korean-drama",
     "hindi-series",
     "hindi-movies",
-    "hindi"
+    "hindi",
+    "bengali-series",
+    "bengali-dubbed-series"
   ];
 
   const categoryPages = categories.map(cat => ({

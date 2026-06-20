@@ -70,6 +70,10 @@ export const SEOManager: React.FC = () => {
           title = "Bengali Movies & Season Pack Archives Free Download – Cinemood";
           description = "Download latest Bengali movies, Kolkata blockbuster releases, and Zee5 original web series with Gofile, Terabox, and Google Drive links in 720p & 1080p BluRay.";
           keywords = "Bengali movies download, Bangla movie index, Kolkata films torrent, Bengoli serial packs, Zee5 original download";
+        } else if (activeCategory === "bengali-series" || activeCategory === "bengali-dubbed-series") {
+          title = "Bengali Dubbed Web Series & Seasons Free Download – Cinemood";
+          description = "Download Bengali dubbed web series, hoichoi releases, complete season packs, and regional dubbed drama shows with fast Gofile and Telegram direct mirrors.";
+          keywords = "Bengali dubbed series download, Bangla dubbed series index, Hoichoi serials download, Bengali serial packs, Cinemood Bengali Series";
         } else if (activeCategory === "web-series") {
           title = "Watch Online Web Series & Complete Seasons Free Download – Cinemood";
           description = "All latest web series from Netflix, Amazon Prime, Hotstar, and Zee5 dubbed in Bangla with high speed direct servers and Telegram links.";
