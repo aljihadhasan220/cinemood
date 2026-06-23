@@ -6,6 +6,24 @@
     <title>Cinemood - HD Movie Downloads | Bengali Movies, Dual Audio & Web Series</title>
     <meta name="description" content="Cinemood is a premium movie indexing and metadata catalog. Direct Gofile download mirrors, Bangla dubbed series, anime sagas, and dual-audio blockbusters instantly." />
     
+    <script>
+      // Gracefully capture any cross-origin script-level failures (such as blocked ad networks or tracking scripts)
+      // and suppress "Script error." or failed external telemetry script logs so they do not taint the app environment.
+      window.addEventListener('error', function(event) {
+        if (event.message === "Script error." || (event.filename && !event.filename.includes(window.location.host))) {
+          event.stopImmediatePropagation();
+          event.preventDefault();
+        }
+      }, true);
+      
+      window.addEventListener('unhandledrejection', function(event) {
+        if (event.reason && event.reason.stack && !event.reason.stack.includes(window.location.host)) {
+          event.stopImmediatePropagation();
+          event.preventDefault();
+        }
+      }, true);
+    </script>
+    
     <!-- Preconnect to high stakes external CDNs for speed optimization -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
