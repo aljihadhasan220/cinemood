@@ -68,6 +68,8 @@ export const SearchPage: React.FC = () => {
             results = results.filter(m => (m.language.toLowerCase().includes("hindi") && m.categories.includes("web-series")) || m.categories.includes("hindi-series"));
           } else if (lCat === "hindi-movies" || lCat === "hindi") {
             results = results.filter(m => m.language.toLowerCase().includes("hindi") && !m.categories.includes("web-series"));
+          } else if (lCat === "telugu-movies" || lCat === "telugu") {
+            results = results.filter(m => m.language.toLowerCase().includes("telugu") || m.categories.includes("telugu-movies") || m.categories.includes("telugu"));
           } else if (lCat === "bengali-series" || lCat === "bengali-dubbed-series") {
             results = results.filter(m => (m.language.toLowerCase().includes("bengali") || m.language.toLowerCase().includes("bangla")) && m.categories.includes("web-series"));
           }

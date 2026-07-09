@@ -103,6 +103,10 @@ export const SEOManager: React.FC = () => {
           title = "Hindi Movies Free Download & Direct Mirror Links – Cinemood";
           description = "Download latest Hindi films, action Bollywood movies, and multi-resolution encodes with superfast direct Gofile and Google Drive mirrors.";
           keywords = "Hindi movies download, Bollywood movies Gofile, free Hindi films download, direct download Hindi movies, Cinemood Hindi Movies";
+        } else if (activeCategory === "telugu-movies" || activeCategory === "telugu") {
+          title = "Telugu Movies Free Download & High Speed Direct Links – Cinemood";
+          description = "Download latest Telugu blockbusters, Tollywood romance and action movies with superfast direct Gofile and Google Drive servers.";
+          keywords = "Telugu movies download, Tollywood cinema Gofile, free Telugu films download, direct download Telugu movies, Cinemood Telugu Movies";
         } else {
           title = `${cleanCat} Movie Archives & Direct Downloads – Cinemood`;
           description = `Free high speed downloads and stream references for ${cleanCat} files. Complete catalog of high quality 4K and 1080p prints.`;
