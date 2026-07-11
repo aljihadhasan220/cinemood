@@ -229,6 +229,43 @@ export const movieService = {
   },
 
   getRecommended: async (currentId?: string | number): Promise<Movie[]> => {
-    return MOVIES_DATABASE.filter(m => m.id !== currentId).slice(0, 4);
+    const current = MOVIES_DATABASE.find(m => m.id === currentId || m.slug === currentId);
+    if (!current) {
+      return MOVIES_DATABASE.slice(0, 4);
+    }
+    const scored = MOVIES_DATABASE.filter(m => m.id !== current.id).map(m => {
+      let score = 0;
+      // Share genres
+      if (m.genres && current.genres) {
+        const intersection = m.genres.filter(g => current.genres.includes(g));
+        score += intersection.length * 5;
+      }
+      // Share categories
+      if (m.categories && current.categories) {
+        const intersection = m.categories.filter(c => current.categories.includes(c));
+        score += intersection.length * 3;
+      }
+      // Share language
+      if (m.language && current.language) {
+        const mLang = m.language.toLowerCase();
+        const curLang = current.language.toLowerCase();
+        if (mLang === curLang) {
+          score += 2;
+        } else {
+          if (mLang.includes("hindi") && curLang.includes("hindi")) score += 1;
+          if (mLang.includes("malayalam") && curLang.includes("malayalam")) score += 1;
+          if (mLang.includes("bengali") && curLang.includes("bengali")) score += 1;
+        }
+      }
+      // Share year
+      if (m.year === current.year) {
+        score += 1;
+      }
+      return { movie: m, score };
+    });
+    return scored
+      .sort((a, b) => b.score - a.score || b.movie.imdbRating - a.movie.imdbRating)
+      .slice(0, 4)
+      .map(item => item.movie);
   }
 };

@@ -52,9 +52,12 @@ export const HeroSlider: React.FC = () => {
           {/* Backdrop Widescreen Image */}
           <img
             src={currentMovie.backdrop}
-            alt={currentMovie.title}
+            alt={`${currentMovie.title} (${currentMovie.year}) spotlight slider banner - Cinemood`}
+            width={1280}
+            height={600}
             referrerPolicy="no-referrer"
             className="absolute inset-0 h-full w-full object-cover object-center"
+            fetchPriority="high"
           />
 
           {/* Vignette Overlays for deep cinematic feel */}

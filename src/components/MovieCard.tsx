@@ -35,7 +35,9 @@ export const MovieCard: React.FC<MovieCardProps> = ({ movie }) => {
       >
         <img
           src={movie.poster}
-          alt={movie.title}
+          alt={`Download ${movie.title} (${movie.year}) poster - Cinemood`}
+          width={340}
+          height={510}
           referrerPolicy="no-referrer"
           className="h-full w-full object-cover transition-transform duration-500 ease-out group-hover:scale-105"
           loading="lazy"

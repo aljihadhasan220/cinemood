@@ -3,9 +3,9 @@ User-agent: *
 Allow: /
 Allow: /category/
 Allow: /movie/
-Allow: /download/
-Allow: /search
-Allow: /bookmarks
+Disallow: /search
+Disallow: /download/
+Disallow: /bookmarks
 
 # Sitemaps Location
 Sitemap: https://cinemood.site/sitemap.xml

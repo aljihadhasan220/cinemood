@@ -180,9 +180,12 @@ export const DetailPage: React.FC = () => {
       <div className="relative h-[480px] md:h-[600px] lg:h-[650px] w-full overflow-hidden">
         <img
           src={movie.backdrop}
-          alt={movie.title}
+          alt={`${movie.title} (${movie.year}) cinematic backdrop - Cinemood`}
+          width={1280}
+          height={720}
           referrerPolicy="no-referrer"
           className="h-full w-full object-cover object-top"
+          fetchPriority="high"
         />
         {/* Gradients to merge into black styling */}
         <div className="absolute inset-0 bg-gradient-to-t from-brand-dark via-brand-dark/30 to-black/50" />
@@ -216,7 +219,9 @@ export const DetailPage: React.FC = () => {
             >
               <img
                 src={movie.poster}
-                alt={movie.title}
+                alt={`${movie.title} (${movie.year}) official poster - Cinemood`}
+                width={300}
+                height={450}
                 referrerPolicy="no-referrer"
                 className="w-full h-full object-cover"
               />
@@ -428,9 +433,12 @@ export const DetailPage: React.FC = () => {
               <div className="absolute inset-0 flex flex-col items-center justify-center p-8 text-center bg-black/90 text-neutral-300">
                 <img
                   src={movie.backdrop}
-                  alt="placeholder"
+                  alt={`${movie.title} (${movie.year}) video streaming player thumbnail - Cinemood`}
+                  width={800}
+                  height={450}
                   referrerPolicy="no-referrer"
                   className="absolute inset-0 w-full h-full object-cover opacity-20 filter grayscale"
+                  loading="lazy"
                 />
                 <div className="relative z-10 max-w-md space-y-4">
                   <div className="inline-flex h-14 w-14 items-center justify-center rounded-2xl bg-brand-red shadow-[0_0_20px_rgba(229,9,20,0.5)] cursor-pointer hover:scale-110 active:scale-95 transition-transform" onClick={() => setIsPlaying(true)}>
@@ -467,7 +475,9 @@ export const DetailPage: React.FC = () => {
                     >
                       <img
                         src={c.image}
-                        alt={c.name}
+                        alt={`Cinemood actor ${c.name} as ${c.role}`}
+                        width={40}
+                        height={40}
                         referrerPolicy="no-referrer"
                         className="h-10 w-10 object-cover rounded-full border border-white/5"
                         loading="lazy"
@@ -498,7 +508,9 @@ export const DetailPage: React.FC = () => {
                     >
                       <img
                         src={s}
-                        alt={`${movie.title} screenshot ${idx + 1}`}
+                        alt={`${movie.title} full-resolution movie screenshot high-quality scene capture ${idx + 1} - Cinemood`}
+                        width={600}
+                        height={375}
                         referrerPolicy="no-referrer"
                         className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-104"
                         loading="lazy"
