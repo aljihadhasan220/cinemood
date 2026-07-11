@@ -107,6 +107,10 @@ export const SEOManager: React.FC = () => {
           title = "Telugu Movies Free Download & High Speed Direct Links – Cinemood";
           description = "Download latest Telugu blockbusters, Tollywood romance and action movies with superfast direct Gofile and Google Drive servers.";
           keywords = "Telugu movies download, Tollywood cinema Gofile, free Telugu films download, direct download Telugu movies, Cinemood Telugu Movies";
+        } else if (activeCategory === "tamil-movies" || activeCategory === "tamil") {
+          title = "Tamil Movies Free Download & High Speed Direct Links – Cinemood";
+          description = "Download latest Tamil blockbusters, Kollywood romance and action movies with superfast direct Gofile and Google Drive servers.";
+          keywords = "Tamil movies download, Kollywood cinema Gofile, free Tamil films download, direct download Tamil movies, Cinemood Tamil Movies";
         } else {
           title = `${cleanCat} Movie Archives & Direct Downloads – Cinemood`;
           description = `Free high speed downloads and stream references for ${cleanCat} files. Complete catalog of high quality 4K and 1080p prints.`;

@@ -43,6 +43,10 @@ try {
     "hindi-series",
     "hindi-movies",
     "hindi",
+    "telugu-movies",
+    "telugu",
+    "tamil-movies",
+    "tamil",
     "bengali-series",
     "bengali-dubbed-series"
   ];
