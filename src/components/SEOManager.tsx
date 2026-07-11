@@ -20,6 +20,7 @@ export const SEOManager: React.FC = () => {
     let ogImage = "https://images.unsplash.com/photo-1536440136628-849c177e76a1?auto=format&fit=crop&q=80&w=1200&h=630"; // Aesthetic fallback
     let robotsValue = "index, follow";
     let schemaMarkup: any[] = [];
+    let currentBreadcrumb: any = null;
 
     // Helper to sanitize title strings for description inclusion
     const cleanStr = (str: string) => str ? str.replace(/"/g, "&quot;") : "";
@@ -38,6 +39,20 @@ export const SEOManager: React.FC = () => {
         "url": `${siteBase}/movie/${m.slug || m.id}`,
         "name": m.fullTitle || m.title
       }));
+
+      currentBreadcrumb = {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "@id": `${siteBase}/#breadcrumb`,
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": `${siteBase}/`
+          }
+        ]
+      };
 
       schemaMarkup = [
         {
@@ -90,31 +105,31 @@ export const SEOManager: React.FC = () => {
       canonicalPath = "/bookmarks";
       robotsValue = "noindex, nofollow"; // Bookmarks page is user-specific
 
-      schemaMarkup = [
-        {
-          "@context": "https://schema.org",
-          "@type": "BreadcrumbList",
-          "@id": `${siteBase}/bookmarks#breadcrumb`,
-          "itemListElement": [
-            {
-              "@type": "ListItem",
-              "position": 1,
-              "name": "Home",
-              "item": `${siteBase}/`
-            },
-            {
-              "@type": "ListItem",
-              "position": 2,
-              "name": "My Watchlist",
-              "item": `${siteBase}/bookmarks`
-            }
-          ]
-        }
-      ];
+      currentBreadcrumb = {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "@id": `${siteBase}/bookmarks#breadcrumb`,
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": `${siteBase}/`
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "My Watchlist",
+            "item": `${siteBase}/bookmarks`
+          }
+        ]
+      };
+
+      schemaMarkup = [];
     } else if (view === "search") {
       if (activeCategory) {
         canonicalPath = `/category/${activeCategory}`;
-        const cleanCat = activeCategory.split("-").map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(" ");
+        const cleanCat = (activeCategory || "Category").split("-").map(w => w ? w.charAt(0).toUpperCase() + w.slice(1) : "").filter(Boolean).join(" ") || "Category";
         
         // Category optimized copy
         if (activeCategory === "bengali-movies") {
@@ -194,32 +209,33 @@ export const SEOManager: React.FC = () => {
           "name": m.title
         }));
 
+        currentBreadcrumb = {
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          "@id": `${siteBase}/category/${activeCategory}#breadcrumb`,
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "name": "Home",
+              "item": `${siteBase}/`
+            },
+            {
+              "@type": "ListItem",
+              "position": 2,
+              "name": "Categories",
+              "item": `${siteBase}/search`
+            },
+            {
+              "@type": "ListItem",
+              "position": 3,
+              "name": cleanCat,
+              "item": `${siteBase}/category/${activeCategory}`
+            }
+          ]
+        };
+
         schemaMarkup = [
-          {
-            "@context": "https://schema.org",
-            "@type": "BreadcrumbList",
-            "@id": `${siteBase}/category/${activeCategory}#breadcrumb`,
-            "itemListElement": [
-              {
-                "@type": "ListItem",
-                "position": 1,
-                "name": "Home",
-                "item": `${siteBase}/`
-              },
-              {
-                "@type": "ListItem",
-                "position": 2,
-                "name": "Categories",
-                "item": `${siteBase}/search`
-              },
-              {
-                "@type": "ListItem",
-                "position": 3,
-                "name": cleanCat,
-                "item": `${siteBase}/category/${activeCategory}`
-              }
-            ]
-          },
           {
             "@context": "https://schema.org",
             "@type": "CollectionPage",
@@ -241,40 +257,11 @@ export const SEOManager: React.FC = () => {
         description = `Find and query direct download links for "${searchQuery}". Check rating, print quality, and release metadata on Cinemood.`;
         canonicalPath = `/search?q=${encodeURIComponent(searchQuery)}`;
         robotsValue = "noindex, nofollow"; // Search result pages should not be crawled to save index budget
-      } else if (filters.genre && filters.genre !== "All") {
-        const slug = filters.genre.toLowerCase();
-        title = `${filters.genre} Genre Archive – Cinemood Movie Download Platform`;
-        description = `Explore high-speed direct links, Gofile indices, and dual audio prints for ${filters.genre} movies on Cinemood.`;
-        canonicalPath = `/category/${slug}`;
-      } else {
-        title = "Explore Global Movie Database & Archives – Cinemood";
-        description = "Advanced multi-criteria search matrix for high-speed download movies, 4K encodes, multi-lingual audio tracks, and custom filters.";
-        canonicalPath = "/search";
-        robotsValue = "noindex, nofollow"; // General search page is not indexed
-      }
-    } else if (view === "detail" && activeMovie) {
-      const releaseYear = activeMovie.year || 2025;
-      const displayTitle = activeMovie.title;
-      const seoLongTitle = activeMovie.fullTitle || `${displayTitle} (${releaseYear}) [${activeMovie.quality}] ${activeMovie.language} Download & Watch Online`;
-      title = `${displayTitle} (${releaseYear}) – Download & Watch Online | Cinemood`;
-      description = `${seoLongTitle} - Free direct high-speed download mirrors on Gofile, Telegram portal, and high-quality web player streams. Storyline: ${cleanStr(activeMovie.storyline || "").slice(0, 160)}...`;
-      keywords = `${displayTitle} movie download, ${displayTitle} (${releaseYear}) download, download ${displayTitle} dual audio, watch ${displayTitle} online free, Gofile index of ${displayTitle}`;
-      canonicalPath = `/movie/${activeMovie.slug || activeMovie.id}`;
-      ogType = "video.movie";
-      ogImage = activeMovie.backdrop || activeMovie.poster;
 
-      const isSeries = activeMovie.categories.includes("web-series") ||
-                       activeMovie.categories.includes("bengali-series") ||
-                       activeMovie.categories.includes("bengali-dubbed-series") ||
-                       activeMovie.categories.includes("hindi-series");
-
-      const itemType = isSeries ? "TVSeries" : "Movie";
-
-      schemaMarkup = [
-        {
+        currentBreadcrumb = {
           "@context": "https://schema.org",
           "@type": "BreadcrumbList",
-          "@id": `${siteBase}/movie/${activeMovie.slug || activeMovie.id}#breadcrumb`,
+          "@id": `${siteBase}/search?q=${encodeURIComponent(searchQuery)}#breadcrumb`,
           "itemListElement": [
             {
               "@type": "ListItem",
@@ -285,21 +272,129 @@ export const SEOManager: React.FC = () => {
             {
               "@type": "ListItem",
               "position": 2,
-              "name": "Movies",
+              "name": "Search",
               "item": `${siteBase}/search`
             },
             {
               "@type": "ListItem",
               "position": 3,
-              "name": displayTitle,
-              "item": `${siteBase}/movie/${activeMovie.slug || activeMovie.id}`
+              "name": `Results for ${searchQuery}`,
+              "item": `${siteBase}/search?q=${encodeURIComponent(searchQuery)}`
             }
           ]
-        },
+        };
+
+        schemaMarkup = [];
+      } else if (filters.genre && filters.genre !== "All") {
+        const slug = filters.genre.toLowerCase();
+        title = `${filters.genre} Genre Archive – Cinemood Movie Download Platform`;
+        description = `Explore high-speed direct links, Gofile indices, and dual audio prints for ${filters.genre} movies on Cinemood.`;
+        canonicalPath = `/category/${slug}`;
+
+        currentBreadcrumb = {
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          "@id": `${siteBase}/category/${slug}#breadcrumb`,
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "name": "Home",
+              "item": `${siteBase}/`
+            },
+            {
+              "@type": "ListItem",
+              "position": 2,
+              "name": "Categories",
+              "item": `${siteBase}/search`
+            },
+            {
+              "@type": "ListItem",
+              "position": 3,
+              "name": filters.genre,
+              "item": `${siteBase}/category/${slug}`
+            }
+          ]
+        };
+
+        schemaMarkup = [];
+      } else {
+        title = "Explore Global Movie Database & Archives – Cinemood";
+        description = "Advanced multi-criteria search matrix for high-speed download movies, 4K encodes, multi-lingual audio tracks, and custom filters.";
+        canonicalPath = "/search";
+        robotsValue = "noindex, nofollow"; // General search page is not indexed
+
+        currentBreadcrumb = {
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          "@id": `${siteBase}/search#breadcrumb`,
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "name": "Home",
+              "item": `${siteBase}/`
+            },
+            {
+              "@type": "ListItem",
+              "position": 2,
+              "name": "Search",
+              "item": `${siteBase}/search`
+            }
+          ]
+        };
+
+        schemaMarkup = [];
+      }
+    } else if (view === "detail" && activeMovie) {
+      const releaseYear = activeMovie.year || 2025;
+      const displayTitle = activeMovie.title || "Movie Detail";
+      const seoLongTitle = activeMovie.fullTitle || `${displayTitle} (${releaseYear}) [${activeMovie.quality}] ${activeMovie.language} Download & Watch Online`;
+      title = `${displayTitle} (${releaseYear}) – Download & Watch Online | Cinemood`;
+      description = `${seoLongTitle} - Free direct high-speed download mirrors on Gofile, Telegram portal, and high-quality web player streams. Storyline: ${cleanStr(activeMovie.storyline || "").slice(0, 160)}...`;
+      keywords = `${displayTitle} movie download, ${displayTitle} (${releaseYear}) download, download ${displayTitle} dual audio, watch ${displayTitle} online free, Gofile index of ${displayTitle}`;
+      canonicalPath = `/movie/${activeMovie.slug || activeMovie.id}`;
+      ogType = "video.movie";
+      ogImage = activeMovie.backdrop || activeMovie.poster;
+
+      const isSeries = activeMovie.categories?.some(c => c.includes("series")) || false;
+      const parentName = isSeries ? "Web Series" : "Movies";
+      const parentLink = isSeries ? `${siteBase}/category/web-series` : `${siteBase}/search`;
+      const movieSlug = activeMovie.slug || activeMovie.id;
+
+      currentBreadcrumb = {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "@id": `${siteBase}/movie/${movieSlug}#breadcrumb`,
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": `${siteBase}/`
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": parentName,
+            "item": parentLink
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "name": displayTitle,
+            "item": `${siteBase}/movie/${movieSlug}`
+          }
+        ]
+      };
+
+      const itemType = isSeries ? "TVSeries" : "Movie";
+
+      schemaMarkup = [
         {
           "@context": "https://schema.org",
           "@type": itemType,
-          "@id": `${siteBase}/movie/${activeMovie.slug || activeMovie.id}#mediaitem`,
+          "@id": `${siteBase}/movie/${movieSlug}#mediaitem`,
           "name": displayTitle,
           "image": activeMovie.poster,
           "description": activeMovie.storyline || activeMovie.description,
@@ -321,7 +416,7 @@ export const SEOManager: React.FC = () => {
         {
           "@context": "https://schema.org",
           "@type": "VideoObject",
-          "@id": `${siteBase}/movie/${activeMovie.slug || activeMovie.id}#video`,
+          "@id": `${siteBase}/movie/${movieSlug}#video`,
           "name": seoLongTitle,
           "description": activeMovie.storyline || activeMovie.description,
           "thumbnailUrl": activeMovie.poster,
@@ -331,7 +426,7 @@ export const SEOManager: React.FC = () => {
         {
           "@context": "https://schema.org",
           "@type": "ImageObject",
-          "@id": `${siteBase}/movie/${activeMovie.slug || activeMovie.id}#poster`,
+          "@id": `${siteBase}/movie/${movieSlug}#poster`,
           "contentUrl": activeMovie.poster,
           "name": `${displayTitle} Poster`,
           "description": `Official promotional poster for ${displayTitle} listed on Cinemood.`
@@ -339,7 +434,7 @@ export const SEOManager: React.FC = () => {
         ...(activeMovie.screenshots || []).map((ss, idx) => ({
           "@context": "https://schema.org",
           "@type": "ImageObject",
-          "@id": `${siteBase}/movie/${activeMovie.slug || activeMovie.id}#screenshot-${idx}`,
+          "@id": `${siteBase}/movie/${movieSlug}#screenshot-${idx}`,
           "contentUrl": ss,
           "name": `${displayTitle} Screenshot ${idx + 1}`,
           "description": `High-quality dynamic scene capture from ${displayTitle} on Cinemood.`
@@ -347,146 +442,147 @@ export const SEOManager: React.FC = () => {
       ];
     } else if (view === "download" && activeMovie) {
       const releaseYear = activeMovie.year || 2025;
-      const displayTitle = activeMovie.title;
+      const displayTitle = activeMovie.title || "Movie Detail";
+      const movieSlug = activeMovie.slug || activeMovie.id;
       title = `Download ${displayTitle} (${releaseYear}) HD Direct Links – Cinemood`;
       description = `Superfast premium download links for ${displayTitle} (${releaseYear}). Direct 1080p, 720p, and 480p dual-audio storage mirrors on Gofile, and Telegram node. Zero premium account required.`;
       keywords = `download ${displayTitle}, gofile speed link ${displayTitle}, ${displayTitle} bangla dubbed torrent`;
-      canonicalPath = `/download/${activeMovie.slug || activeMovie.id}`;
+      canonicalPath = `/download/${movieSlug}`;
       robotsValue = "noindex, nofollow"; // Download redirect / wait pages must NOT be indexed
       ogType = "video.movie";
       ogImage = activeMovie.poster;
 
-      schemaMarkup = [
-        {
-          "@context": "https://schema.org",
-          "@type": "BreadcrumbList",
-          "@id": `${siteBase}/download/${activeMovie.slug || activeMovie.id}#breadcrumb`,
-          "itemListElement": [
-            {
-              "@type": "ListItem",
-              "position": 1,
-              "name": "Home",
-              "item": `${siteBase}/`
-            },
-            {
-              "@type": "ListItem",
-              "position": 2,
-              "name": displayTitle,
-              "item": `${siteBase}/movie/${activeMovie.slug || activeMovie.id}`
-            },
-            {
-              "@type": "ListItem",
-              "position": 3,
-              "name": "Download Links",
-              "item": `${siteBase}/download/${activeMovie.slug || activeMovie.id}`
-            }
-          ]
-        }
-      ];
+      currentBreadcrumb = {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "@id": `${siteBase}/download/${movieSlug}#breadcrumb`,
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": `${siteBase}/`
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": displayTitle,
+            "item": `${siteBase}/movie/${movieSlug}`
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "Download Links",
+            "item": `${siteBase}/download/${movieSlug}`
+          }
+        ]
+      };
+
+      schemaMarkup = [];
     } else if (view === "about") {
       title = "About Cinemood - Premium Movie Indexing System";
       description = "Learn more about Cinemood, our core index curation philosophy, safe Gofile link standards, and dual-audio streaming referencing catalogs.";
       canonicalPath = "/about";
 
-      schemaMarkup = [
-        {
-          "@context": "https://schema.org",
-          "@type": "BreadcrumbList",
-          "@id": `${siteBase}/about#breadcrumb`,
-          "itemListElement": [
-            {
-              "@type": "ListItem",
-              "position": 1,
-              "name": "Home",
-              "item": `${siteBase}/`
-            },
-            {
-              "@type": "ListItem",
-              "position": 2,
-              "name": "About Us",
-              "item": `${siteBase}/about`
-            }
-          ]
-        }
-      ];
+      currentBreadcrumb = {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "@id": `${siteBase}/about#breadcrumb`,
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": `${siteBase}/`
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "About Us",
+            "item": `${siteBase}/about`
+          }
+        ]
+      };
+
+      schemaMarkup = [];
     } else if (view === "privacy") {
       title = "Privacy Policy & Cookie Consent - Cinemood";
       description = "View our comprehensive privacy policy regarding cookie usage, local client caching, Popunder ad frequencies, and Google Analytics 4 tracking protocols.";
       canonicalPath = "/privacy";
 
-      schemaMarkup = [
-        {
-          "@context": "https://schema.org",
-          "@type": "BreadcrumbList",
-          "@id": `${siteBase}/privacy#breadcrumb`,
-          "itemListElement": [
-            {
-              "@type": "ListItem",
-              "position": 1,
-              "name": "Home",
-              "item": `${siteBase}/`
-            },
-            {
-              "@type": "ListItem",
-              "position": 2,
-              "name": "Privacy Policy",
-              "item": `${siteBase}/privacy`
-            }
-          ]
-        }
-      ];
+      currentBreadcrumb = {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "@id": `${siteBase}/privacy#breadcrumb`,
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": `${siteBase}/`
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Privacy Policy",
+            "item": `${siteBase}/privacy`
+          }
+        ]
+      };
+
+      schemaMarkup = [];
     } else if (view === "contact") {
       title = "Contact Support & Community - Cinemood";
       description = "Connect with the Cinemood Central team instantly. Join our verified Telegram Channel, contact our support admin, or submit link abuse notifications.";
       canonicalPath = "/contact";
 
-      schemaMarkup = [
-        {
-          "@context": "https://schema.org",
-          "@type": "BreadcrumbList",
-          "@id": `${siteBase}/contact#breadcrumb`,
-          "itemListElement": [
-            {
-              "@type": "ListItem",
-              "position": 1,
-              "name": "Home",
-              "item": `${siteBase}/`
-            },
-            {
-              "@type": "ListItem",
-              "position": 2,
-              "name": "Contact",
-              "item": `${siteBase}/contact`
-            }
-          ]
-        }
-      ];
+      currentBreadcrumb = {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "@id": `${siteBase}/contact#breadcrumb`,
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": `${siteBase}/`
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Contact",
+            "item": `${siteBase}/contact`
+          }
+        ]
+      };
+
+      schemaMarkup = [];
     } else if (view === "disclaimer") {
       title = "Disclaimer & DMCA Copyright Takedown - Cinemood";
       description = "Read our official legal terms and DMCA compliance guidelines. Cinemood does not host any movie files or media files onto local storage setups.";
       canonicalPath = "/disclaimer";
 
-      schemaMarkup = [
-        {
-          "@context": "https://schema.org",
-          "@type": "BreadcrumbList",
-          "@id": `${siteBase}/disclaimer#breadcrumb`,
-          "itemListElement": [
-            {
-              "@type": "ListItem",
-              "position": 1,
-              "name": "Home",
-              "item": `${siteBase}/`
-            },
-            {
-              "@type": "ListItem",
-              "position": 2,
-              "name": "Disclaimer",
-              "item": `${siteBase}/disclaimer`
-            }
-          ]
-        }
-      ];
+      currentBreadcrumb = {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "@id": `${siteBase}/disclaimer#breadcrumb`,
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": `${siteBase}/`
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Disclaimer",
+            "item": `${siteBase}/disclaimer`
+          }
+        ]
+      };
+
+      schemaMarkup = [];
     }
 
     // 4. Update Standard Document Title
@@ -566,22 +662,28 @@ export const SEOManager: React.FC = () => {
     updateOrCreateMeta("twitter:image", ogImage);
 
     // Inject dynamic WebPage parent schema alongside state schemas
-    const webPageBase = {
+    const webPageBase: any = {
       "@context": "https://schema.org",
       "@type": "WebPage",
       "@id": `${siteBase}${canonicalPath}#webpage`,
       "url": `${siteBase}${canonicalPath}`,
       "name": title,
       "description": description,
-      "breadcrumb": {
-        "@id": `${siteBase}${canonicalPath}#breadcrumb`
-      },
       "isPartOf": {
         "@id": `${siteBase}/#website`
       }
     };
 
+    if (currentBreadcrumb) {
+      webPageBase.breadcrumb = {
+        "@id": currentBreadcrumb["@id"]
+      };
+    }
+
     const finalSchemas = [webPageBase, ...schemaMarkup];
+    if (currentBreadcrumb) {
+      finalSchemas.push(currentBreadcrumb);
+    }
 
     // 5. Inject JSON-LD Script block
     let jsonldScript = document.getElementById("jsonld-seo-schema") as HTMLScriptElement;
