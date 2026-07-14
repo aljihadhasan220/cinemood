@@ -88,7 +88,7 @@ export const SEOManager: React.FC = () => {
             "email": "cinemood.site@gmail.com"
           },
           "sameAs": [
-            "https://t.me/cinemood_channel"
+            "https://telegram.me/cinemood_channel"
           ]
         },
         {

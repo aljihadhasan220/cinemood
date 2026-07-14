@@ -76,7 +76,7 @@ export const ContactPage: React.FC = () => {
           <div className="space-y-4">
             {/* Telegram Channel */}
             <a
-              href="https://t.me/cinemood_channel"
+              href="https://telegram.me/cinemood_channel"
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-start gap-4 p-4 rounded-xl bg-gradient-to-br from-[#0a0a0a] to-[#040404] border border-white/5 hover:border-[#229ED9]/50 transition-all group"

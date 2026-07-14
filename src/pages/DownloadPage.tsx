@@ -269,7 +269,7 @@ export const DownloadPage: React.FC = () => {
 
           {/* 5. Official Telegram Button (Join network node) */}
           <div
-            onClick={() => handleExternalNavigate("https://t.me/cinemood_channel")}
+            onClick={() => handleExternalNavigate("https://telegram.me/cinemood_channel")}
             className="group bg-gradient-to-r from-cyan-600/10 to-cyan-500/10 hover:from-cyan-600 hover:to-cyan-500 hover:text-white text-left p-5 rounded-2xl border border-cyan-500/20 hover:border-cyan-500 text-cyan-400 shadow-md hover:shadow-[0_0_25px_rgba(6,182,212,0.4)] transition-all duration-300 transform hover:-translate-y-0.5 active:translate-y-0 cursor-pointer flex items-center justify-between gap-4"
           >
             <div className="flex items-center gap-4">
@@ -294,7 +294,7 @@ export const DownloadPage: React.FC = () => {
         <div className="mt-8 pt-6 border-t border-white/5 flex flex-col sm:flex-row items-center justify-between gap-4 text-[10px] text-neutral-500 font-mono">
           <p>Links are indexed and validated in real time.</p>
           <p className="flex items-center gap-1.5">
-            Having download speed issues? <span className="text-brand-red cursor-pointer hover:underline" onClick={() => handleExternalNavigate("https://t.me/cinemood_channel")}>Report to Admin</span>
+            Having download speed issues? <span className="text-brand-red cursor-pointer hover:underline" onClick={() => handleExternalNavigate("https://telegram.me/cinemood_channel")}>Report to Admin</span>
           </p>
         </div>
 

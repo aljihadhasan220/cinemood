@@ -131,7 +131,7 @@ export const Footer: React.FC = () => {
             </p>
             <div className="pt-2">
               <a
-                href="https://t.me/cinemood_channel"
+                href="https://telegram.me/cinemood_channel"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 rounded-xl bg-brand-red px-5 py-2.5 text-xs font-bold text-white shadow-[0_4px_12px_rgba(229,9,20,0.25)] hover:shadow-[0_4px_16px_rgba(229,9,20,0.4)] hover:brightness-110 hover:scale-105 active:scale-95 transition-all cursor-pointer"

@@ -21,7 +21,7 @@ export const FloatingTelegram: React.FC = () => {
 
           {/* Telegram branding & link */}
           <a
-            href="https://t.me/cinemood_channel"
+            href="https://telegram.me/cinemood_channel"
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center gap-3 active:scale-95 transition-transform"
