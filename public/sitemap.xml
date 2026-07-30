@@ -581,6 +581,12 @@
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
+  <url>
+    <loc>https://cinemood.site/movie/maa-inti-bangaram-2026</loc>
+    <lastmod>2026-07-30</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+  </url>
 
   <!-- Movie Download Mirror Indexes -->
   <url>
@@ -1018,6 +1024,12 @@
   <url>
     <loc>https://cinemood.site/download/musafir-cafe-season-1</loc>
     <lastmod>2026-07-28</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://cinemood.site/download/maa-inti-bangaram-2026</loc>
+    <lastmod>2026-07-30</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
