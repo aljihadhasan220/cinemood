@@ -15,7 +15,7 @@ import {
 import { motion, AnimatePresence } from "motion/react";
 
 export const DownloadPage: React.FC = () => {
-  const { selectedMovieId, allMovies, setView, isLoading } = useApp();
+  const { selectedMovieId, allMovies, setView, isLoading, navigateToMovie } = useApp();
   const [countdown, setCountdown] = useState(5);
   const [linksGenerated, setLinksGenerated] = useState(false);
   const [selectedMirror, setSelectedMirror] = useState<string | null>(null);
@@ -58,7 +58,15 @@ export const DownloadPage: React.FC = () => {
     );
   }
 
-  const isAdMovie = movie.id === "new-gods-yang-jian-2022" || movie.id === "madhuvidhu-2026" || movie.id === "chand-mera-dil-2026" || movie.id === "bonolota-express-2026" || movie.id === "drishyam-3-2026" || movie.id === "absolute-value-of-romance-season-1" || movie.id === "kara-2026" || movie.id === "tajmahal-2026" || movie.id === "s-line-2026-s01" || movie.id === "trigger-2025-s01" || movie.id === "voyal-2026" || movie.id === "kattalan-2026" || movie.id === "doraemon-the-movie-nobitas-little-star-wars-2021-2022" || movie.id === "classroom-of-the-elite-season-1-3" || movie.id === "spider-noir-season-1" || movie.id === "rockstar-2026-bengali" || movie.id === "peddi-2026-dual-audio" || movie.id === "patriot-2026" || movie.id === "29-2026" || movie.id === "iccheta-je-here-geche-2026" || movie.id === "michael-2026" || movie.id === "ugly-story-2026" || movie.id === "valavaara-2026" || movie.id === "karuppu-2026" || movie.id === "thukra-ke-mera-pyaar-2024-s01" || movie.id === "every-year-after-s01" || movie.id === "euphoria-2026-hindi-hq-studio-dub" || movie.id === "sambhavam-adhyayam-onnu-2026" || movie.id === "bandar-2026-v2-hq-hdtc-hindi-clean" || movie.id === "kenatha-kanom-2026" || movie.id === "resort-2026-s01" || movie.id === "real-time-love-2026-s01" || movie.id === "lifeline-2026" || movie.id === "bachelor-point-2026-s05" || movie.id === "abhhiman-2026" || movie.id === "cocktail-2-2026" || movie.id === "saptadingar-guptodhon-2026" || movie.id === "blast-2026" || movie.id === "lingam-2026-s01" || movie.id === "tuck-jagadish-2021" || movie.id === "lockdown-2024" || movie.id === "meet-cute-2022-s01" || movie.id === "isakapatnam-2026-s01" || movie.id === "gyani-goni-4-5-2026" || movie.id === "alpha-2026" || movie.id === "pritam-and-pedro-season-1" || movie.id === "mollywood-times-2026" || movie.id === "alal-dulal-2026" || movie.id === "avatar-the-last-airbender-season-2" || movie.id === "sing-geetham-2026" || movie.id === "parimala-and-co-2026" || movie.id === "dose-2026" || movie.id === "ikka-2026" || movie.id === "balti-2026" || movie.id === "dhamaal-4-2026" || movie.id === "m4m-motive-for-murder-2026" || movie.id === "mario-2025" || movie.id === "ek-din-2026" || movie.id === "thukra-ke-mera-pyaar-season-2-2026" || movie.id === "virginpur-2026-s01" || movie.id === "momacu-2026" || movie.id === "dhadak-2-2025" || movie.id === "brothers-and-sisters-2026-s01" || movie.id === "rockstar-2026" || movie.id === "con-city-2026" || movie.id === "adarsh-baal-vidyalaya-season-1" || movie.id === "musafir-cafe-season-1" || movie.id === "maa-inti-bangaram-2026" || movie.id === "spider-man-brand-new-day-2026" || movie.id === "gatta-kusthi-2-2026" || movie.id === "balan-the-boy-2026" || movie.id === "uyir-2026" || movie.id === "the-devil-2025";
+  const handleDownloadRedirect = (targetUrl: string) => {
+    setSelectedMirror(targetUrl);
+    try {
+      window.open("https://eternalwheeled.com/mjhr1b5qb?key=bd35010fe9ea077642babfaec7258267", "_blank", "noopener,noreferrer");
+    } catch {
+      // ignore popup error
+    }
+    window.location.href = targetUrl;
+  };
 
   const handleExternalNavigate = (url: string) => {
     setSelectedMirror(url);
@@ -112,13 +120,7 @@ export const DownloadPage: React.FC = () => {
               onClick={() => {
                 const localUrl = movie.downloadLinks?.find(l => l.serverName.toLowerCase().includes("4k"))?.url 
                   || `https://gofile.io/d/cinemood-${movie.id}-4k`;
-                if (isAdMovie) {
-                  setSelectedMirror(localUrl);
-                  window.open("https://eternalwheeled.com/nb8tim21p?key=14ec617a43996791d6944be87909a459", "_blank", "noopener,noreferrer");
-                  window.location.href = localUrl;
-                } else {
-                  handleExternalNavigate(localUrl);
-                }
+                handleDownloadRedirect(localUrl);
               }}
               className="group bg-gradient-to-r from-neutral-900/90 to-neutral-800/95 hover:from-[#111111] hover:to-[#171717] hover:border-brand-red/40 text-left p-5 rounded-2xl border border-white/5 shadow-lg hover:shadow-[0_0_20px_rgba(229,9,20,0.35)] transition-all duration-300 transform hover:-translate-y-0.5 active:translate-y-0 cursor-pointer flex items-center justify-between gap-4"
             >
@@ -145,13 +147,7 @@ export const DownloadPage: React.FC = () => {
               const localUrl = movie.downloadLinks?.find(l => l.serverName.toLowerCase().includes("1080"))?.url 
                 || movie.downloadLinks?.[0]?.url 
                 || `https://gofile.io/d/cinemood-${movie.id}-1080p`;
-              if (isAdMovie) {
-                setSelectedMirror(localUrl);
-                window.open("https://eternalwheeled.com/nb8tim21p?key=14ec617a43996791d6944be87909a459", "_blank", "noopener,noreferrer");
-                window.location.href = localUrl;
-              } else {
-                handleExternalNavigate(localUrl);
-              }
+              handleDownloadRedirect(localUrl);
             }}
             className="group bg-gradient-to-r from-neutral-900/90 to-neutral-800/95 hover:from-[#111111] hover:to-[#171717] hover:border-brand-red/40 text-left p-5 rounded-2xl border border-white/5 shadow-lg hover:shadow-[0_0_20px_rgba(229,9,20,0.35)] transition-all duration-300 transform hover:-translate-y-0.5 active:translate-y-0 cursor-pointer flex items-center justify-between gap-4"
           >
@@ -177,13 +173,7 @@ export const DownloadPage: React.FC = () => {
               const localUrl = movie.downloadLinks?.find(l => l.serverName.toLowerCase().includes("720"))?.url 
                 || movie.downloadLinks?.[1]?.url 
                 || `https://gofile.io/d/cinemood-${movie.id}-720p`;
-              if (isAdMovie) {
-                setSelectedMirror(localUrl);
-                window.open("https://eternalwheeled.com/nb8tim21p?key=14ec617a43996791d6944be87909a459", "_blank", "noopener,noreferrer");
-                window.location.href = localUrl;
-              } else {
-                handleExternalNavigate(localUrl);
-              }
+              handleDownloadRedirect(localUrl);
             }}
             className="group bg-gradient-to-r from-neutral-900/90 to-neutral-800/95 hover:from-[#111111] hover:to-[#171717] hover:border-brand-red/40 text-left p-5 rounded-2xl border border-white/5 shadow-lg hover:shadow-[0_0_20px_rgba(229,9,20,0.35)] transition-all duration-300 transform hover:-translate-y-0.5 active:translate-y-0 cursor-pointer flex items-center justify-between gap-4"
           >
@@ -209,13 +199,7 @@ export const DownloadPage: React.FC = () => {
               const localUrl = movie.downloadLinks?.find(l => l.serverName.toLowerCase().includes("480"))?.url 
                 || movie.downloadLinks?.[2]?.url 
                 || `https://gofile.io/d/cinemood-${movie.id}-480p`;
-              if (isAdMovie) {
-                setSelectedMirror(localUrl);
-                window.open("https://eternalwheeled.com/nb8tim21p?key=14ec617a43996791d6944be87909a459", "_blank", "noopener,noreferrer");
-                window.location.href = localUrl;
-              } else {
-                handleExternalNavigate(localUrl);
-              }
+              handleDownloadRedirect(localUrl);
             }}
             className="group bg-gradient-to-r from-neutral-900/90 to-neutral-800/95 hover:from-[#111111] hover:to-[#171717] hover:border-brand-red/40 text-left p-5 rounded-2xl border border-white/5 shadow-lg hover:shadow-[0_0_20px_rgba(229,9,20,0.35)] transition-all duration-300 transform hover:-translate-y-0.5 active:translate-y-0 cursor-pointer flex items-center justify-between gap-4"
           >
@@ -238,16 +222,17 @@ export const DownloadPage: React.FC = () => {
           {/* 4. Watch Online (Direct streaming trigger button) */}
           <div
             onClick={() => {
-              if (movie.watchOnlineUrl) {
-                handleExternalNavigate(movie.watchOnlineUrl);
-              } else {
-                setView("detail");
-                // Micro delay to wait for panel transition then scroll to video container
-                setTimeout(() => {
-                  const node = document.getElementById("player-container-node");
-                  if (node) node.scrollIntoView({ behavior: "smooth" });
-                }, 100);
+              try {
+                window.open("https://eternalwheeled.com/mjhr1b5qb?key=bd35010fe9ea077642babfaec7258267", "_blank", "noopener,noreferrer");
+              } catch {
+                // ignore
               }
+              window.location.hash = "stream";
+              navigateToMovie(movie.id.toString(), "detail");
+              setTimeout(() => {
+                const node = document.getElementById("player-container-node");
+                if (node) node.scrollIntoView({ behavior: "smooth" });
+              }, 150);
             }}
             className="group bg-gradient-to-r from-brand-red to-red-600 hover:brightness-110 text-left p-5 rounded-2xl border border-white/10 shadow-xl hover:shadow-[0_0_25px_rgba(229,9,20,0.6)] transition-all duration-300 transform hover:-translate-y-0.5 active:translate-y-0 cursor-pointer flex items-center justify-between gap-4"
           >

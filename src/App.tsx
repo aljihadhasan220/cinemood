@@ -12,6 +12,7 @@ import { TrailerPopup } from "./components/TrailerPopup";
 import { SEOManager } from "./components/SEOManager";
 import { PopunderManager } from "./components/PopunderManager";
 import { BackButtonAdManager } from "./components/BackButtonAdManager";
+import { SocialBarManager } from "./components/SocialBarManager";
 
 // Pages
 import { Home } from "./pages/Home";

@@ -32,7 +32,7 @@ export const BackButtonAdManager: React.FC = () => {
 
       // Open the advertisement link in a user-friendly way (new tab) so they are not blocked
       try {
-        const adUrl = "https://eternalwheeled.com/nb8tim21p?key=14ec617a43996791d6944be87909a459";
+        const adUrl = "https://eternalwheeled.com/mjhr1b5qb?key=bd35010fe9ea077642babfaec7258267";
         window.open(adUrl, "_blank", "noopener,noreferrer");
       } catch (err) {
         console.debug("[BackButtonAdManager] Popup trace intercepted or blocked by browser:", err);

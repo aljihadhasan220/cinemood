@@ -23,6 +23,7 @@ import {
 } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
 import { MovieCard } from "../components/MovieCard";
+import { SocialBarManager } from "../components/SocialBarManager";
 
 export const DetailPage: React.FC = () => {
   const {
@@ -80,8 +81,18 @@ export const DetailPage: React.FC = () => {
     };
 
     fetchDetails();
-    // Reset player on movie change
-    setIsPlaying(false);
+    // Reset player on movie change unless #stream hash is present
+    if (window.location.hash === "#stream") {
+      setIsPlaying(true);
+      setTimeout(() => {
+        const pEl = document.getElementById("player-container-node");
+        if (pEl) {
+          pEl.scrollIntoView({ behavior: "smooth" });
+        }
+      }, 300);
+    } else {
+      setIsPlaying(false);
+    }
     setPlayerProgress(0);
   }, [selectedMovieId]);
 
@@ -91,19 +102,22 @@ export const DetailPage: React.FC = () => {
     if (isPlaying && movie) {
       interval = setInterval(() => {
         setPlayerProgress(prev => {
-          const next = prev + 1;
-          if (next >= 100) {
+          if (prev >= 100) {
             setIsPlaying(false);
             return 100;
           }
-          // Update global continue watching tracking context
-          addContinueWatching(movie.id.toString(), next);
-          return next;
+          return prev + 1;
         });
       }, 1000);
     }
     return () => clearInterval(interval);
   }, [isPlaying, movie]);
+
+  useEffect(() => {
+    if (isPlaying && movie && playerProgress > 0) {
+      addContinueWatching(movie.id.toString(), playerProgress);
+    }
+  }, [playerProgress, isPlaying, movie, addContinueWatching]);
 
   if (loading) {
     return (
@@ -157,12 +171,19 @@ export const DetailPage: React.FC = () => {
   };
 
   const handleTriggerPlay = () => {
-    setIsPlaying(true);
-    // Smooth scroll down to simulated player view
-    const pEl = document.getElementById("player-container-node");
-    if (pEl) {
-      pEl.scrollIntoView({ behavior: "smooth" });
+    try {
+      window.open("https://eternalwheeled.com/mjhr1b5qb?key=bd35010fe9ea077642babfaec7258267", "_blank", "noopener,noreferrer");
+    } catch {
+      // ignore popup blocker error
     }
+    setIsPlaying(true);
+    // Smooth scroll down to streaming player node
+    setTimeout(() => {
+      const pEl = document.getElementById("player-container-node");
+      if (pEl) {
+        pEl.scrollIntoView({ behavior: "smooth" });
+      }
+    }, 100);
   };
 
   const formattedTime = (percentage: number) => {
@@ -362,72 +383,85 @@ export const DetailPage: React.FC = () => {
 
           <div className="relative aspect-video w-full max-w-4xl mx-auto rounded-3xl overflow-hidden border border-white/5 bg-black hover:border-brand-red/10 transition-colors shadow-[0_4px_30px_rgba(0,0,0,0.8)]">
             {isPlaying ? (
-              <div className="absolute inset-0 flex flex-col justify-end">
-                {/* Simulated playing image backdrop with micro movement */}
-                <img
-                  src={movie.backdrop}
-                  alt="streaming"
-                  referrerPolicy="no-referrer"
-                  className="absolute inset-0 w-full h-full object-cover blur-xs opacity-40 scale-102"
-                />
+              <div className="absolute inset-0 flex flex-col bg-black">
+                <SocialBarManager />
+                {movie.watchOnlineUrl ? (
+                  <iframe
+                    src={movie.watchOnlineUrl}
+                    title={`${movie.title} Stream Live`}
+                    className="w-full h-full border-0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    allowFullScreen
+                  />
+                ) : (
+                  <div className="absolute inset-0 flex flex-col justify-end">
+                    {/* Simulated playing image backdrop with micro movement */}
+                    <img
+                      src={movie.backdrop}
+                      alt="streaming"
+                      referrerPolicy="no-referrer"
+                      className="absolute inset-0 w-full h-full object-cover blur-xs opacity-40 scale-102"
+                    />
 
-                {/* Simulated playback visual pulses */}
-                <div className="absolute inset-0 flex items-center justify-center bg-black/30">
-                  <div className="p-5 rounded-full bg-brand-red/10 border border-brand-red/40 animate-ping h-12 w-12 absolute" />
-                  <div className="relative text-center space-y-2 z-10 px-4">
-                    <p className="text-xs font-mono font-bold text-brand-red uppercase tracking-widest animate-pulse">Streaming Session Active</p>
-                    <h4 className="text-lg font-black text-white">{movie.title}</h4>
-                    <p className="text-[10px] text-neutral-400">Storing progress checkpoint in your history cards...</p>
-                  </div>
-                </div>
-
-                {/* Simulated video dashboard controllers */}
-                <div className="relative z-10 bg-gradient-to-t from-black via-black/80 to-transparent p-6 space-y-4">
-                  {/* Progress Line */}
-                  <div className="space-y-1.5">
-                    <div className="relative w-full bg-neutral-800 h-1.5 rounded-full cursor-pointer">
-                      <div
-                        className="bg-brand-red h-full rounded-full relative"
-                        style={{ width: `${playerProgress}%` }}
-                      >
-                        <div className="absolute -right-1.5 -top-1 h-3.5 w-3.5 rounded-full bg-brand-red shadow border-2 border-white" />
+                    {/* Simulated playback visual pulses */}
+                    <div className="absolute inset-0 flex items-center justify-center bg-black/30">
+                      <div className="p-5 rounded-full bg-brand-red/10 border border-brand-red/40 animate-ping h-12 w-12 absolute" />
+                      <div className="relative text-center space-y-2 z-10 px-4">
+                        <p className="text-xs font-mono font-bold text-brand-red uppercase tracking-widest animate-pulse">Streaming Session Active</p>
+                        <h4 className="text-lg font-black text-white">{movie.title}</h4>
+                        <p className="text-[10px] text-neutral-400">Storing progress checkpoint in your history cards...</p>
                       </div>
                     </div>
-                    <div className="flex justify-between items-center text-[10px] text-neutral-400 font-mono">
-                      <span>{formattedTime(playerProgress)}</span>
-                      <span>Buffered 100%</span>
+
+                    {/* Simulated video dashboard controllers */}
+                    <div className="relative z-10 bg-gradient-to-t from-black via-black/80 to-transparent p-6 space-y-4">
+                      {/* Progress Line */}
+                      <div className="space-y-1.5">
+                        <div className="relative w-full bg-neutral-800 h-1.5 rounded-full cursor-pointer">
+                          <div
+                            className="bg-brand-red h-full rounded-full relative"
+                            style={{ width: `${playerProgress}%` }}
+                          >
+                            <div className="absolute -right-1.5 -top-1 h-3.5 w-3.5 rounded-full bg-brand-red shadow border-2 border-white" />
+                          </div>
+                        </div>
+                        <div className="flex justify-between items-center text-[10px] text-neutral-400 font-mono">
+                          <span>{formattedTime(playerProgress)}</span>
+                          <span>Buffered 100%</span>
+                        </div>
+                      </div>
+
+                      {/* Operational controls */}
+                      <div className="flex justify-between items-center">
+                        <div className="flex items-center gap-4">
+                          <button
+                            onClick={() => setIsPlaying(false)}
+                            className="p-1 rounded bg-white/5 text-neutral-200 hover:text-brand-red cursor-pointer text-xs font-semibold px-2.5 py-1"
+                          >
+                            Pause Stream
+                          </button>
+                          <button
+                            onClick={() => setPlayerProgress(0)}
+                            className="flex items-center gap-1 text-[10px] text-neutral-400 hover:text-white cursor-pointer"
+                            title="Reset playback slider"
+                          >
+                            <RotateCcw className="h-3 w-3" /> Reset
+                          </button>
+                        </div>
+
+                        <div className="flex items-center gap-4 text-[10px] text-neutral-400 font-mono">
+                          <button
+                            onClick={() => setIsMuted(!isMuted)}
+                            className="hover:text-brand-red cursor-pointer"
+                          >
+                            {isMuted ? "🔇 Unmute Audio" : "🔊 Audio Dual"}
+                          </button>
+                          <span className="hidden sm:inline">CDN: Frankfurt Alpha</span>
+                        </div>
+                      </div>
                     </div>
                   </div>
-
-                  {/* Operational controls */}
-                  <div className="flex justify-between items-center">
-                    <div className="flex items-center gap-4">
-                      <button
-                        onClick={() => setIsPlaying(false)}
-                        className="p-1 rounded bg-white/5 text-neutral-200 hover:text-brand-red cursor-pointer text-xs font-semibold px-2.5 py-1"
-                      >
-                        Pause Stream
-                      </button>
-                      <button
-                        onClick={() => setPlayerProgress(0)}
-                        className="flex items-center gap-1 text-[10px] text-neutral-400 hover:text-white cursor-pointer"
-                        title="Reset playback slider"
-                      >
-                        <RotateCcw className="h-3 w-3" /> Reset
-                      </button>
-                    </div>
-
-                    <div className="flex items-center gap-4 text-[10px] text-neutral-400 font-mono">
-                      <button
-                        onClick={() => setIsMuted(!isMuted)}
-                        className="hover:text-brand-red cursor-pointer"
-                      >
-                        {isMuted ? "🔇 Unmute Audio" : "🔊 Audio Dual"}
-                      </button>
-                      <span className="hidden sm:inline">CDN: Frankfurt Alpha</span>
-                    </div>
-                  </div>
-                </div>
+                )}
               </div>
             ) : (
               <div className="absolute inset-0 flex flex-col items-center justify-center p-8 text-center bg-black/90 text-neutral-300">
