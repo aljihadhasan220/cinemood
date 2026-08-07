@@ -2,9 +2,45 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
     <title>Cinemood - HD Movie Downloads | Bengali Movies, Dual Audio & Web Series</title>
     <meta name="description" content="Cinemood is a premium movie indexing and metadata catalog. Direct Gofile download mirrors, Bangla dubbed series, anime sagas, and dual-audio blockbusters instantly." />
+    
+    <script>
+      // Prevent pinch zoom and gesture zoom on mobile devices
+      document.addEventListener('gesturestart', function(e) {
+        e.preventDefault();
+      });
+      document.addEventListener('gesturechange', function(e) {
+        e.preventDefault();
+      });
+      document.addEventListener('gestureend', function(e) {
+        e.preventDefault();
+      });
+      
+      // Prevent multi-touch pinch zoom
+      document.addEventListener('touchstart', function(e) {
+        if (e.touches && e.touches.length > 1) {
+          e.preventDefault();
+        }
+      }, { passive: false });
+
+      // Prevent double-tap zoom
+      var lastTouchEnd = 0;
+      document.addEventListener('touchend', function(e) {
+        var now = (new Date()).getTime();
+        if (now - lastTouchEnd <= 300) {
+          // Allow default for buttons/inputs if needed, but prevent double-tap zoom
+          var target = e.target;
+          if (target && (target.tagName === 'INPUT' || target.tagName === 'TEXTAREA' || target.tagName === 'BUTTON')) {
+            // let default happen
+          } else {
+            e.preventDefault();
+          }
+        }
+        lastTouchEnd = now;
+      }, false);
+    </script>
     
     <script>
       // Gracefully capture any cross-origin script-level failures (such as blocked ad networks or tracking scripts)

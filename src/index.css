@@ -15,12 +15,14 @@ html {
   scroll-padding-top: 80px;
   -webkit-text-size-adjust: 100%;
   -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
 }
 
 body {
   text-rendering: optimizeSpeed;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  touch-action: manipulation;
 }
 
 /* GPU Hardware Acceleration helper */
