@@ -7,5 +7,15 @@ Disallow: /search
 Disallow: /download/
 Disallow: /bookmarks
 
+# Explicit crawler permissions for Googlebot-Image to index favicons and thumbnails
+User-agent: Googlebot-Image
+Allow: /
+Allow: /favicon.ico
+Allow: /*.png
+Allow: /*.jpg
+Allow: /*.ico
+Allow: /*.svg
+Allow: /*.webmanifest
+
 # Sitemaps Location
 Sitemap: https://cinemood.site/sitemap.xml

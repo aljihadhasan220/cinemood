@@ -36,8 +36,14 @@ export const SEOManager: React.FC = () => {
       const homepageList = allMovies.slice(0, 10).map((m, index) => ({
         "@type": "ListItem",
         "position": index + 1,
-        "url": `${siteBase}/movie/${m.slug || m.id}`,
-        "name": m.fullTitle || m.title
+        "name": m.fullTitle || m.title || "Untitled",
+        "item": {
+          "@type": "Movie",
+          "@id": `${siteBase}/movie/${m.slug || m.id}#movie`,
+          "url": `${siteBase}/movie/${m.slug || m.id}`,
+          "name": m.fullTitle || m.title || "Untitled",
+          "image": m.poster || ogImage
+        }
       }));
 
       currentBreadcrumb = {
@@ -61,6 +67,9 @@ export const SEOManager: React.FC = () => {
           "@id": `${siteBase}/#website`,
           "name": "Cinemood",
           "url": `${siteBase}/`,
+          "publisher": {
+            "@id": `${siteBase}/#organization`
+          },
           "potentialAction": {
             "@type": "SearchAction",
             "target": {
@@ -78,9 +87,12 @@ export const SEOManager: React.FC = () => {
           "url": `${siteBase}/`,
           "logo": {
             "@type": "ImageObject",
-            "url": "https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?auto=format&fit=crop&q=80&w=300&h=300",
-            "width": "300",
-            "height": "300"
+            "@id": `${siteBase}/#logo`,
+            "url": `${siteBase}/android-chrome-512x512.png`,
+            "contentUrl": `${siteBase}/android-chrome-512x512.png`,
+            "width": "512",
+            "height": "512",
+            "caption": "Cinemood Logo"
           },
           "contactPoint": {
             "@type": "ContactPoint",
@@ -94,6 +106,7 @@ export const SEOManager: React.FC = () => {
         {
           "@context": "https://schema.org",
           "@type": "ItemList",
+          "@id": `${siteBase}/#latest-uploads`,
           "name": "Cinemood Latest Uploads",
           "numberOfItems": allMovies.length,
           "itemListElement": homepageList
@@ -205,8 +218,14 @@ export const SEOManager: React.FC = () => {
         const itemListElement = catMovies.slice(0, 10).map((m, idx) => ({
           "@type": "ListItem",
           "position": idx + 1,
-          "url": `${siteBase}/movie/${m.slug || m.id}`,
-          "name": m.title
+          "name": m.title || m.fullTitle || "Untitled",
+          "item": {
+            "@type": "Movie",
+            "@id": `${siteBase}/movie/${m.slug || m.id}#movie`,
+            "url": `${siteBase}/movie/${m.slug || m.id}`,
+            "name": m.title || m.fullTitle || "Untitled",
+            "image": m.poster || ogImage
+          }
         }));
 
         currentBreadcrumb = {
@@ -392,21 +411,24 @@ export const SEOManager: React.FC = () => {
 
       schemaMarkup = [
         {
-          "@context": "https://schema.org",
           "@type": itemType,
           "@id": `${siteBase}/movie/${movieSlug}#mediaitem`,
           "name": displayTitle,
-          "image": activeMovie.poster,
-          "description": activeMovie.storyline || activeMovie.description,
+          "alternateName": activeMovie.fullTitle || displayTitle,
+          "image": activeMovie.poster ? [activeMovie.poster] : [ogImage],
+          "description": cleanStr(activeMovie.storyline || activeMovie.description || displayTitle),
           "dateCreated": releaseYear.toString(),
-          "genre": activeMovie.genres,
-          "duration": activeMovie.duration || "2h 00m",
+          "datePublished": releaseYear.toString(),
+          "inLanguage": activeMovie.language || "English",
+          "genre": Array.isArray(activeMovie.genres) ? activeMovie.genres : (activeMovie.genre ? activeMovie.genre.split(", ").map(g => g.trim()) : ["Drama"]),
+          "duration": activeMovie.duration && activeMovie.duration.startsWith("PT") ? activeMovie.duration : "PT2H0M",
           "releasedEvent": {
             "@type": "PublicationEvent",
             "startDate": releaseYear.toString()
           },
           "aggregateRating": {
             "@type": "AggregateRating",
+            "@id": `${siteBase}/movie/${movieSlug}#rating`,
             "ratingValue": activeMovie.imdbRating ? activeMovie.imdbRating.toString() : "7.5",
             "bestRating": "10",
             "worstRating": "1",
@@ -414,27 +436,26 @@ export const SEOManager: React.FC = () => {
           }
         },
         {
-          "@context": "https://schema.org",
           "@type": "VideoObject",
           "@id": `${siteBase}/movie/${movieSlug}#video`,
-          "name": seoLongTitle,
-          "description": activeMovie.storyline || activeMovie.description,
-          "thumbnailUrl": activeMovie.poster,
+          "name": `${displayTitle} (${releaseYear}) Official Trailer`,
+          "description": cleanStr(activeMovie.storyline || activeMovie.description || seoLongTitle),
+          "thumbnailUrl": [activeMovie.poster || ogImage],
           "uploadDate": "2026-05-21T07:11:00Z",
           "embedUrl": `https://www.youtube.com/embed/${activeMovie.trailerUrl || "ARL_JNv7xT0"}`
         },
         {
-          "@context": "https://schema.org",
           "@type": "ImageObject",
           "@id": `${siteBase}/movie/${movieSlug}#poster`,
-          "contentUrl": activeMovie.poster,
+          "url": activeMovie.poster || ogImage,
+          "contentUrl": activeMovie.poster || ogImage,
           "name": `${displayTitle} Poster`,
           "description": `Official promotional poster for ${displayTitle} listed on Cinemood.`
         },
         ...(activeMovie.screenshots || []).map((ss, idx) => ({
-          "@context": "https://schema.org",
           "@type": "ImageObject",
           "@id": `${siteBase}/movie/${movieSlug}#screenshot-${idx}`,
+          "url": ss,
           "contentUrl": ss,
           "name": `${displayTitle} Screenshot ${idx + 1}`,
           "description": `High-quality dynamic scene capture from ${displayTitle} on Cinemood.`
@@ -663,7 +684,6 @@ export const SEOManager: React.FC = () => {
 
     // Inject dynamic WebPage parent schema alongside state schemas
     const webPageBase: any = {
-      "@context": "https://schema.org",
       "@type": "WebPage",
       "@id": `${siteBase}${canonicalPath}#webpage`,
       "url": `${siteBase}${canonicalPath}`,
@@ -680,21 +700,33 @@ export const SEOManager: React.FC = () => {
       };
     }
 
-    const finalSchemas = [webPageBase, ...schemaMarkup];
+    const allNodes = [webPageBase, ...schemaMarkup];
     if (currentBreadcrumb) {
-      finalSchemas.push(currentBreadcrumb);
+      allNodes.push(currentBreadcrumb);
     }
+
+    // Strip redundant '@context' declarations from inner graph items
+    const cleanedNodes = allNodes.map(node => {
+      if (!node) return null;
+      const { "@context": _, ...rest } = node;
+      return rest;
+    }).filter(Boolean);
+
+    const rootGraphSchema = {
+      "@context": "https://schema.org",
+      "@graph": cleanedNodes
+    };
 
     // 5. Inject JSON-LD Script block
     let jsonldScript = document.getElementById("jsonld-seo-schema") as HTMLScriptElement;
-    if (finalSchemas.length > 0) {
+    if (cleanedNodes.length > 0) {
       if (!jsonldScript) {
         jsonldScript = document.createElement("script");
         jsonldScript.id = "jsonld-seo-schema";
         jsonldScript.type = "application/ld+json";
         document.head.appendChild(jsonldScript);
       }
-      jsonldScript.textContent = JSON.stringify(finalSchemas, null, 2);
+      jsonldScript.textContent = JSON.stringify(rootGraphSchema, null, 2);
     } else {
       if (jsonldScript) {
         jsonldScript.remove();
